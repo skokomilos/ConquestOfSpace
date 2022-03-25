@@ -1,8 +1,15 @@
 package com.space.conquestofspace.data.remote.dto
 
+import com.space.conquestofspace.domain.model.Status
+
 data class StatusDTO(
     val id: Int,
-    val name: String,
-    val abbrev: String,
-    val description: String
-)
+    val abbrev: String
+){
+    fun toStatus(): Status{
+        return Status(
+            id = id,
+            abbrev = abbrev
+        )
+    }
+}

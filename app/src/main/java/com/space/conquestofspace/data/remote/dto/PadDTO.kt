@@ -1,5 +1,7 @@
 package com.space.conquestofspace.data.remote.dto
 
+import com.space.conquestofspace.domain.model.Pad
+
 data class PadDTO(
     val id: Int,
     val url: String,
@@ -10,4 +12,11 @@ data class PadDTO(
     val location: LocationDTO,
     val map_image: String,
     val map_url: String,
-)
+){
+    fun toPad(): Pad {
+        return Pad(
+            id = id,
+            location = location.toLocation()
+        )
+    }
+}
