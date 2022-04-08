@@ -1,6 +1,6 @@
 package com.space.conquestofspace.data.remote.dto
 
-import com.space.conquestofspace.domain.model.Launch
+import com.space.conquestofspace.data.local.entity.LaunchEntity
 
 /*
     Data Transfer Object
@@ -28,8 +28,8 @@ data class LaunchDTO(
     val webcast_live: Boolean
 ){
     //mapper fun
-    fun toLaunch(): Launch {
-        return Launch(
+    fun toLaunchEntity(): LaunchEntity {
+        return LaunchEntity(
             name = name,
             status = status.toStatus(),
             window_start = window_start,

@@ -13,5 +13,5 @@ import com.space.conquestofspace.data.local.entity.LaunchEntity
 @TypeConverters(Converters::class)
 abstract class SpaceDB: RoomDatabase() {
 
-    abstract val dao: LaunchDao
+    abstract fun launchDao(): LaunchDao
 }

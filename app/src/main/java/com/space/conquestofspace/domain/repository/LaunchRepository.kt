@@ -6,5 +6,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface LaunchRepository {
 
-    fun getLaunches(): Flow<Resource<List<Launch>>>
+    fun getLaunches(currentTime: String): Flow<Resource<List<Launch>>>
 }
