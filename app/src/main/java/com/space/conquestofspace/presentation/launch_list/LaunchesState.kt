@@ -1,4 +1,4 @@
-package com.space.conquestofspace.presentation.state
+package com.space.conquestofspace.presentation.launch_list
 
 import com.space.conquestofspace.domain.model.Launch
 

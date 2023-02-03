@@ -1,4 +1,4 @@
-package com.space.conquestofspace.presentation.viewModel
+package com.space.conquestofspace.presentation.launch_list
 
 import androidx.lifecycle.ViewModel
 import com.space.conquestofspace.domain.use_case.get_launches.GetLaunchesUseCase
