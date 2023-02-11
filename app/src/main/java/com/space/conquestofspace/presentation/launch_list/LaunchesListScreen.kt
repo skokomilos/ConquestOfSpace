@@ -30,14 +30,14 @@ fun LaunchesListScreen(
     val state = viewModel.state.value
     Box(modifier = Modifier.fillMaxSize()) {
         LazyColumn(modifier = Modifier.fillMaxSize()) {
-            items(state.launches) { launch ->
-                LaunchListItem(
-                    launch = launch,
-                    onItemClick = {
-                        navController.navigate(Screen.LaunchDetailScreen.route + "/${launch.name}")
-                    }
-                )
-            }
+                items(state.launches) { launch ->
+                    LaunchListItem(
+                        launch = launch,
+                        onItemClick = {
+                            navController.navigate(Screen.LaunchDetailScreen.route + "/${launch.name}")
+                        }
+                    )
+                }
         }
         if(state.error.isNotBlank()) {
             Text(

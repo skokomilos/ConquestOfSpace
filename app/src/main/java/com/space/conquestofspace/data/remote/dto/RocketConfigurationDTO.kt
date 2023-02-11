@@ -12,6 +12,7 @@ data class RocketConfigurationDTO(
     fun toRocketConfiguration(): RocketConfiguration{
         return RocketConfiguration(
             id = id,
+            url = url,
             name = name,
             family = family,
             full_name = full_name

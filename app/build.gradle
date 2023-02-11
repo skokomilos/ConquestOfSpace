@@ -92,6 +92,8 @@ dependencies {
     //room
     implementation "androidx.room:room-runtime:$rootProject.roomVersion"
     implementation "androidx.room:room-ktx:$rootProject.roomVersion"
+    implementation("androidx.room:room-common:$roomVersion")
+    implementation("androidx.room:room-paging:$roomVersion")
     kapt "androidx.room:room-compiler:$rootProject.roomVersion"
 
     //coroutines

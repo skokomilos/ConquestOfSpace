@@ -3,7 +3,6 @@ package com.space.conquestofspace.data.local.entity
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.space.conquestofspace.domain.model.Launch
-import com.space.conquestofspace.domain.model.Pad
 import com.space.conquestofspace.domain.model.Rocket
 import com.space.conquestofspace.domain.model.Status
 
@@ -13,8 +12,8 @@ data class LaunchEntity(
     val status: Status,
     val window_start: String,
     val rocket: Rocket,
-    val pad: Pad,
-    val image: String,
+  //  val pad: Pad,
+    //val image: String,
     val webcast_live: Boolean,
     @PrimaryKey val id: Int? = null
 ){
@@ -24,8 +23,8 @@ data class LaunchEntity(
             status = status,
             window_start = window_start,
             rocket = rocket,
-            pad = pad,
-            image = image,
+            //pad = pad,
+            //image = image,
             webcast_live = webcast_live
         )
     }

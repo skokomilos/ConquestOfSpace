@@ -1,5 +1,6 @@
 package com.space.conquestofspace.data.local.dao
 
+import android.util.Log
 import androidx.room.*
 import com.space.conquestofspace.data.local.entity.LaunchEntity
 
@@ -12,6 +13,6 @@ interface LaunchDao {
     @Query("SELECT * FROM launchentity")
     suspend fun getLaunches(): List<LaunchEntity>
 
-    @Delete
-    suspend fun deleteLaunches(): List<LaunchEntity>
+    @Query("DELETE FROM launchentity")
+    suspend fun deleteLaunches()
 }

@@ -34,8 +34,8 @@ data class LaunchDTO(
             status = status.toStatus(),
             window_start = window_start,
             rocket = rocket.toRocket(),
-            pad = pad.toPad(),
-            image = image,
+            //pad = pad.toPad(),
+            //image = image,
             webcast_live = webcast_live
         )
     }
