@@ -13,7 +13,7 @@ data class LaunchEntity(
     val window_start: String,
     val rocket: Rocket,
   //  val pad: Pad,
-    //val image: String,
+    val image: String,
     val webcast_live: Boolean,
     @PrimaryKey val id: Int? = null
 ){
@@ -24,7 +24,7 @@ data class LaunchEntity(
             window_start = window_start,
             rocket = rocket,
             //pad = pad,
-            //image = image,
+            image = image,
             webcast_live = webcast_live
         )
     }

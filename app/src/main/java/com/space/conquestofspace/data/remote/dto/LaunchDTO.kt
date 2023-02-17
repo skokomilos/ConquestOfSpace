@@ -35,7 +35,7 @@ data class LaunchDTO(
             window_start = window_start,
             rocket = rocket.toRocket(),
             //pad = pad.toPad(),
-            //image = image,
+            image = image,
             webcast_live = webcast_live
         )
     }
