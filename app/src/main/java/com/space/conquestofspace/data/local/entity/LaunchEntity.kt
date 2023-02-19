@@ -17,7 +17,7 @@ data class LaunchEntity(
     val webcast_live: Boolean,
     @PrimaryKey val id: Int? = null
 ){
-    fun toLaunch(): Launch{
+    fun toLaunch(): Launch {
         return Launch(
             name = name,
             status = status,
