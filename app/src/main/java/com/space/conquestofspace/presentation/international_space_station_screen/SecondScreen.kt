@@ -11,7 +11,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 @Composable
 fun InternationalSpaceStationScreen(
     viewModel: IssViewModel = hiltViewModel()
-){
+) {
     val state = viewModel.state.value
     Box(
         modifier = Modifier.fillMaxSize(),

@@ -11,8 +11,8 @@ data class PadDTO(
     val wiki_url: String,
     val location: LocationDTO,
     val map_image: String,
-    val map_url: String,
-){
+    val map_url: String
+) {
     fun toPad(): Pad {
         return Pad(
             id = id,

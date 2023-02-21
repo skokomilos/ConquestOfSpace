@@ -7,9 +7,9 @@ import androidx.lifecycle.viewModelScope
 import com.space.conquestofspace.domain.use_case.get_launches.GetLaunchesUseCase
 import com.space.core.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import javax.inject.Inject
 
 @HiltViewModel
 class LaunchesViewModel @Inject constructor(
@@ -25,7 +25,7 @@ class LaunchesViewModel @Inject constructor(
 
     private fun getLaunches() {
         getLaunchesUseCase().onEach { result ->
-            when(result) {
+            when (result) {
                 is Resource.Success -> {
                     _state.value = LaunchesState(launches = result.data ?: emptyList())
                 }
@@ -38,5 +38,4 @@ class LaunchesViewModel @Inject constructor(
             }
         }.launchIn(viewModelScope)
     }
-
 }

@@ -11,17 +11,17 @@ import okhttp3.Response
 class NetworkInterceptor constructor(private val applicationContext: Context) : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
-        if(!isConnected()) {
+        if (!isConnected()) {
             throw NoInternetConnectionException()
         }
         val newRequest = chain.request().newBuilder().build()
         return chain.proceed(newRequest)
     }
 
-    private fun isConnected() : Boolean {
+    private fun isConnected(): Boolean {
         val connectivityManager = applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE)
-        as ConnectivityManager
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            as ConnectivityManager
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             val network = connectivityManager.activeNetwork ?: return false
             val activeNetwork = connectivityManager.getNetworkCapabilities(network) ?: return false
             return when {
@@ -29,10 +29,9 @@ class NetworkInterceptor constructor(private val applicationContext: Context) : 
                 activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
                 else -> false
             }
-        }else {
+        } else {
             val networkInfo = connectivityManager.activeNetworkInfo ?: return false
             return networkInfo.isConnected
         }
     }
-
 }

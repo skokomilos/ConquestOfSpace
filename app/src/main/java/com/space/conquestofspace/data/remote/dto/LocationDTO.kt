@@ -8,8 +8,8 @@ data class LocationDTO(
     val name: String,
     val country_code: String,
     val map_image: String
-){
-    fun toLocation(): Location{
+) {
+    fun toLocation(): Location {
         return Location(
             id = id,
             name = name

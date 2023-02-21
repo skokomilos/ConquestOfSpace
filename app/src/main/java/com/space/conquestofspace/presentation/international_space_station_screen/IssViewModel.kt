@@ -7,14 +7,14 @@ import androidx.lifecycle.viewModelScope
 import com.space.conquestofspace.domain.use_case.get_iss.GetIssUseCase
 import com.space.core.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import javax.inject.Inject
 
 @HiltViewModel
 class IssViewModel @Inject constructor(
     private val getIssUseCase: GetIssUseCase
-) : ViewModel(){
+) : ViewModel() {
 
     private val _state = mutableStateOf(IssState())
     val state: State<IssState> = _state
@@ -25,7 +25,7 @@ class IssViewModel @Inject constructor(
 
     private fun getIss() {
         getIssUseCase().onEach { result ->
-            when(result) {
+            when (result) {
                 is Resource.Success -> {
                     _state.value = IssState(iss = result.data)
                 }
@@ -38,5 +38,4 @@ class IssViewModel @Inject constructor(
             }
         }.launchIn(viewModelScope)
     }
-
 }

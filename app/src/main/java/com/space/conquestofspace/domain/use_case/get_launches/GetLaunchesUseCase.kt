@@ -12,6 +12,7 @@ class GetLaunchesUseCase constructor(
 
     operator fun invoke(): Flow<Resource<List<Launch>>> {
         return repository.getLaunches(
-            parseCurrentTimeToSimpleDateFormat())
+            parseCurrentTimeToSimpleDateFormat()
+        )
     }
 }

@@ -21,7 +21,7 @@ object AppModule {
     fun provideLaunchRepository(
         api: TheSpaceDevApi,
         launchDao: LaunchDao
-    ): MainRepository{
+    ): MainRepository {
         return LaunchRepositoryImpl(api, launchDao)
     }
 

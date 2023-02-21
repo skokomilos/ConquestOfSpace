@@ -10,12 +10,11 @@ object HelperMethods {
         return formatter.format(this)
     }
 
-    fun  getCurrentDateTime(): Date {
+    fun getCurrentDateTime(): Date {
         return Calendar.getInstance().time
     }
 
     fun parseCurrentTimeToSimpleDateFormat(): String {
         return SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").format(getCurrentDateTime().time)
     }
-
 }

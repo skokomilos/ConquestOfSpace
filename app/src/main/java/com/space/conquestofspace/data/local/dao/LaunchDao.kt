@@ -1,9 +1,7 @@
 package com.space.conquestofspace.data.local.dao
 
-import android.util.Log
 import androidx.room.*
 import com.space.conquestofspace.data.local.entity.LaunchEntity
-import com.space.conquestofspace.data.remote.dto.iss.SpaceStationResponse
 
 @Dao
 interface LaunchDao {

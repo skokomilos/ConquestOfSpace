@@ -10,11 +10,10 @@ import com.space.conquestofspace.presentation.third_screen.ThirdScreen
 
 @Composable
 fun BottomNavGraph(navHostController: NavHostController) {
-
     NavHost(
         navController = navHostController,
-        startDestination = BottomNavItem.Launches.route)
-    {
+        startDestination = BottomNavItem.Launches.route
+    ) {
         composable(BottomNavItem.Launches.route) {
             LaunchesListScreen()
         }

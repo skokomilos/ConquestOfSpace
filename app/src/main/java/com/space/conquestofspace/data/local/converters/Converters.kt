@@ -18,10 +18,10 @@ Converters(
 ) {
 
     @TypeConverter
-    fun fromStatusJson(json: String): Status?{
+    fun fromStatusJson(json: String): Status? {
         return jsonParser.fromJson<Status>(
             json,
-            object : TypeToken<Status>(){}.type
+            object : TypeToken<Status>() {}.type
         )
     }
 
@@ -29,7 +29,7 @@ Converters(
     fun toStatusJson(status: Status): String {
         return jsonParser.toJson(
             status,
-            object : TypeToken<Status>(){}.type
+            object : TypeToken<Status>() {}.type
         ) ?: "[]"
     }
 
@@ -39,7 +39,6 @@ Converters(
             json,
             object : TypeToken<Pad>() {}.type
         )
-
     }
 
     @TypeConverter

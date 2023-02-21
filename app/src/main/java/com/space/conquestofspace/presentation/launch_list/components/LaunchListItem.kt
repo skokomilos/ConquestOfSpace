@@ -18,7 +18,6 @@ import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
 import com.space.conquestofspace.domain.model.Launch
 
-
 /**
  *
  * @author berka on 2/3/23
@@ -60,7 +59,7 @@ fun LaunchListItem(
                         modifier = Modifier
                             .align(Alignment.BottomCenter)
                             .fillMaxWidth()
-                            .background(Color.Gray.copy(alpha = 0.7f)),
+                            .background(Color.Gray.copy(alpha = 0.7f))
                     )
                 }
             }

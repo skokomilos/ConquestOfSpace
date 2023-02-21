@@ -21,7 +21,7 @@ sealed class BottomNavItem(
         route = "iss",
         icon = Icons.Default.Place
     )
-    object Third: BottomNavItem(
+    object Third : BottomNavItem(
         name = "Third",
         route = "third",
         icon = Icons.Default.Email

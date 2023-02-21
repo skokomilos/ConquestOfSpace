@@ -10,7 +10,7 @@ import com.space.conquestofspace.presentation.bottom_nav_menu.BottomNavigationBa
 fun ConquestOfSpaceApp() {
     val navController = rememberNavController()
     Scaffold(
-        bottomBar = { BottomNavigationBar(navController = navController)}
+        bottomBar = { BottomNavigationBar(navController = navController) }
     ) {
         BottomNavGraph(navHostController = navController)
     }

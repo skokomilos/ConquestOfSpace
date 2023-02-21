@@ -6,5 +6,4 @@ data class LaunchesState(
     val launches: List<Launch> = emptyList(),
     val isLoading: Boolean = false,
     val error: String = ""
-) {
-}
+)

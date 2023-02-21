@@ -5,7 +5,7 @@ data class Launch(
     val status: Status,
     val window_start: String,
     val rocket: Rocket,
-   // val pad: Pad,
+    // val pad: Pad,
     val image: String,
     val webcast_live: Boolean
 )

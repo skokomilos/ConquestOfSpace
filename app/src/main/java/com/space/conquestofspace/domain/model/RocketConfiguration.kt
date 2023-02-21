@@ -5,5 +5,5 @@ data class RocketConfiguration(
     val url: String,
     val name: String,
     val family: String,
-    val full_name: String,
+    val full_name: String
 )

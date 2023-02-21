@@ -7,9 +7,9 @@ data class RocketConfigurationDTO(
     val url: String,
     val name: String,
     val family: String,
-    val full_name: String,
-){
-    fun toRocketConfiguration(): RocketConfiguration{
+    val full_name: String
+) {
+    fun toRocketConfiguration(): RocketConfiguration {
         return RocketConfiguration(
             id = id,
             url = url,

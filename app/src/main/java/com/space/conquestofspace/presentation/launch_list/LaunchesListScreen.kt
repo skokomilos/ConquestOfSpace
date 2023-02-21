@@ -15,8 +15,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
-import com.space.conquestofspace.presentation.Screen
 
 /**
  *
@@ -24,22 +22,22 @@ import com.space.conquestofspace.presentation.Screen
  */
 @Composable
 fun LaunchesListScreen(
-    //navController: NavController,
+    // navController: NavController,
     viewModel: LaunchesViewModel = hiltViewModel()
 ) {
     val state = viewModel.state.value
     Box(modifier = Modifier.fillMaxSize()) {
         LazyColumn(modifier = Modifier.fillMaxSize()) {
-                items(state.launches) { launch ->
-                    LaunchListItem(
-                        launch = launch,
-                        onItemClick = {
-                           // navController.navigate(Screen.LaunchDetailScreen.route + "/${launch.name}")
-                        }
-                    )
-                }
+            items(state.launches) { launch ->
+                LaunchListItem(
+                    launch = launch,
+                    onItemClick = {
+                        // navController.navigate(Screen.LaunchDetailScreen.route + "/${launch.name}")
+                    }
+                )
+            }
         }
-        if(state.error.isNotBlank()) {
+        if (state.error.isNotBlank()) {
             Text(
                 text = state.error,
                 color = MaterialTheme.colors.error,
@@ -54,5 +52,4 @@ fun LaunchesListScreen(
             CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
         }
     }
-
 }

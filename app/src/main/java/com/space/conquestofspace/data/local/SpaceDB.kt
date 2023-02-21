@@ -12,8 +12,9 @@ import com.space.conquestofspace.data.local.entity.LaunchEntity
     version = 1
 )
 @TypeConverters(
-    Converters::class)
-abstract class SpaceDB: RoomDatabase() {
+    Converters::class
+)
+abstract class SpaceDB : RoomDatabase() {
 
     abstract fun launchDao(): LaunchDao
 }

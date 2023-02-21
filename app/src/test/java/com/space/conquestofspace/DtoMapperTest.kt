@@ -1,11 +1,12 @@
 package com.space.conquestofspace
 import com.space.conquestofspace.data.local.entity.LaunchEntity
 import com.space.conquestofspace.data.remote.dto.LaunchDTO
-import com.space.conquestofspace.data.remote.dto.RocketDTO
-import com.space.conquestofspace.data.remote.dto.RocketConfigurationDTO
-import com.space.conquestofspace.data.remote.dto.PadDTO
 import com.space.conquestofspace.data.remote.dto.LocationDTO
+import com.space.conquestofspace.data.remote.dto.PadDTO
+import com.space.conquestofspace.data.remote.dto.RocketConfigurationDTO
+import com.space.conquestofspace.data.remote.dto.RocketDTO
 import com.space.conquestofspace.data.remote.dto.StatusDTO
+import com.space.conquestofspace.domain.model.Rocket
 import com.space.conquestofspace.domain.model.Status
 import org.junit.Assert.assertEquals
 import org.junit.Test
@@ -24,8 +25,27 @@ class DtoMapperTest {
             net = "net",
             window_end = "window_end",
             window_start = "window_start",
-            rocket = RocketDTO(configuration = RocketConfigurationDTO(id = 1, url = "url", name = "name", family = "family", full_name = "full_name"), id = 1),
-            pad = PadDTO(id = 1, url = "url", agency_id = Any(), name = "name", info_url = Any(), wiki_url = "wiki_url", location = LocationDTO(id = 1, url = "url", name = "name", country_code = "country_code", map_image = "image"), map_image = "map_image", map_url = "map_url"),
+            rocket = RocketDTO(
+                configuration = RocketConfigurationDTO(
+                    id = 1,
+                    url = "url",
+                    name = "name",
+                    family = "family",
+                    full_name = "full_name"
+                ),
+                id = 1
+            ),
+            pad = PadDTO(
+                id = 1, url = "url", agency_id = Any(), name = "name", info_url = Any(), wiki_url = "wiki_url",
+                location = LocationDTO(
+                    id = 1,
+                    url = "url",
+                    name = "name",
+                    country_code = "country_code",
+                    map_image = "image"
+                ),
+                map_image = "map_image", map_url = "map_url"
+            ),
             image = "image",
             webcast_live = false
         )
@@ -33,7 +53,19 @@ class DtoMapperTest {
         val expected = LaunchEntity(
             name = "name",
             status = Status(id = 1, abbrev = "abbrev"),
-            window_start = "window_start"
+            window_start = "window_start",
+            rocket = Rocket(
+                configuration = RocketConfigurationDTO(
+                    id = 1,
+                    url = "url",
+                    name = "name",
+                    family = "family",
+                    full_name = "full_name"
+                ),
+                id = 1
+            ),
+            image = "image",
+            webcast_live = false
         )
 
         val result = launchDTO.toLaunchEntity()
@@ -44,7 +76,13 @@ class DtoMapperTest {
     @Test
     fun `Test RocketDTO toRocket()`() {
         val rocketDto = RocketDTO(
-            configuration = RocketConfigurationDTO(id = 1, url = "url", name = "name", family = "family", full_name = "full_name"),
+            configuration = RocketConfigurationDTO(
+                id = 1,
+                url = "url",
+                name = "name",
+                family = "family",
+                full_name = "full_name"
+            ),
             id = 2
         )
 
@@ -67,7 +105,13 @@ class DtoMapperTest {
             name = "name",
             info_url = Any(),
             wiki_url = "wiki_url",
-            location = LocationDTO(id = 2, url = "url", name = "name", country_code = "code", map_image = "map_image"),
+            location = LocationDTO(
+                id = 2,
+                url = "url",
+                name = "name",
+                country_code = "code",
+                map_image = "map_image"
+            ),
             map_image = "map_image",
             map_url = "map_url"
         )

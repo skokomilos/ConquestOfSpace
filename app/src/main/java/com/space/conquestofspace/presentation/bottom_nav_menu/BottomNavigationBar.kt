@@ -23,7 +23,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 @Composable
 fun BottomNavigationBar(
     navController: NavController,
-    modifier: Modifier = Modifier,
+    modifier: Modifier = Modifier
 ) {
     val screens = listOf(
         BottomNavItem.Launches,
@@ -59,12 +59,11 @@ fun RowScope.AddItem(
             it.route == screen.route
         } == true,
         onClick = {
-            navController.navigate(screen.route)
-            {
+            navController.navigate(screen.route) {
                 popUpTo(navController.graph.findStartDestination().id)
                 launchSingleTop = true
             }
-                  },
+        },
         label = {
             Text(
                 text = screen.name,
@@ -83,5 +82,4 @@ fun RowScope.AddItem(
         selectedContentColor = Color.Green,
         unselectedContentColor = Color.Gray
     )
-
 }

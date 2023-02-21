@@ -21,7 +21,9 @@ object DatabaseModule {
     @Provides
     fun provideAppDatabase(app: Application): SpaceDB {
         return Room.databaseBuilder(
-            app, SpaceDB::class.java, "space_db"
+            app,
+            SpaceDB::class.java,
+            "space_db"
         ).addTypeConverter(Converters(GsonParser(Gson())))
             .build()
     }
