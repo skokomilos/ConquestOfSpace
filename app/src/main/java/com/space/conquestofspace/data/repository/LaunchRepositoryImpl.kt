@@ -2,8 +2,9 @@ package com.space.conquestofspace.data.repository
 
 import com.space.conquestofspace.data.local.dao.LaunchDao
 import com.space.conquestofspace.data.remote.TheSpaceDevApi
+import com.space.conquestofspace.data.remote.dto.iss.SpaceStationResponse
 import com.space.conquestofspace.domain.model.Launch
-import com.space.conquestofspace.domain.repository.LaunchRepository
+import com.space.conquestofspace.domain.repository.MainRepository
 import com.space.core.util.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -13,7 +14,7 @@ import java.io.IOException
 class LaunchRepositoryImpl(
     private val api: TheSpaceDevApi,
     private val dao: LaunchDao
-): LaunchRepository {
+): MainRepository {
 
     override fun getLaunches(currentTime: String): Flow<Resource<List<Launch>>> = flow{
         emit(Resource.Loading())
@@ -38,4 +39,20 @@ class LaunchRepositoryImpl(
         val newLaunches = dao.getLaunches().map { it.toLaunch() }
         emit(Resource.Success(newLaunches))
     }
+
+    override fun getIss(): Flow<Resource<SpaceStationResponse>> = flow {
+        emit(Resource.Loading())
+
+        try {
+            val iss = api.getLatestISSExpedition()
+            emit(Resource.Success(iss))
+        } catch (e: java.lang.Exception) {
+            emit(Resource.Error(
+                message = "General error"
+            ))
+        }
+
+    }
+
+
 }

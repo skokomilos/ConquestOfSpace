@@ -24,7 +24,7 @@ import com.space.conquestofspace.presentation.Screen
  */
 @Composable
 fun LaunchesListScreen(
-    navController: NavController,
+    //navController: NavController,
     viewModel: LaunchesViewModel = hiltViewModel()
 ) {
     val state = viewModel.state.value
@@ -34,7 +34,7 @@ fun LaunchesListScreen(
                     LaunchListItem(
                         launch = launch,
                         onItemClick = {
-                            navController.navigate(Screen.LaunchDetailScreen.route + "/${launch.name}")
+                           // navController.navigate(Screen.LaunchDetailScreen.route + "/${launch.name}")
                         }
                     )
                 }

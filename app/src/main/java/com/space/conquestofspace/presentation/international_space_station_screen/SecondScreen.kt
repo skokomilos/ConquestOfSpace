@@ -6,13 +6,17 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 
 @Composable
-fun InternationalSpaceStationScreen(){
+fun InternationalSpaceStationScreen(
+    viewModel: IssViewModel = hiltViewModel()
+){
+    val state = viewModel.state.value
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        Text(text = "ISS Screen")
+        state.iss?.name?.let { Text(text = it) }
     }
 }

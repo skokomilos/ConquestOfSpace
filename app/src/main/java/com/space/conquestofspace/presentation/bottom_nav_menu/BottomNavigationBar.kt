@@ -17,8 +17,8 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
-import androidx.navigation.compose.rememberNavController
 
 @Composable
 fun BottomNavigationBar(
@@ -26,7 +26,7 @@ fun BottomNavigationBar(
     modifier: Modifier = Modifier,
 ) {
     val screens = listOf(
-        BottomNavItem.Home,
+        BottomNavItem.Launches,
         BottomNavItem.Iss,
         BottomNavItem.Third
     )
@@ -59,7 +59,12 @@ fun RowScope.AddItem(
             it.route == screen.route
         } == true,
         onClick = {
-            navController.navigate(screen.route) },
+            navController.navigate(screen.route)
+            {
+                popUpTo(navController.graph.findStartDestination().id)
+                launchSingleTop = true
+            }
+                  },
         label = {
             Text(
                 text = screen.name,

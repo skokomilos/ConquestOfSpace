@@ -11,14 +11,14 @@ sealed class BottomNavItem(
     val route: String,
     val icon: ImageVector
 ) {
-    object Home : BottomNavItem(
-        name = "Home",
-        route = "home",
+    object Launches : BottomNavItem(
+        name = "Launches",
+        route = "launches",
         icon = Icons.Default.Home
     )
     object Iss : BottomNavItem(
-        name = "Second",
-        route = "second",
+        name = "Iss",
+        route = "iss",
         icon = Icons.Default.Place
     )
     object Third: BottomNavItem(
