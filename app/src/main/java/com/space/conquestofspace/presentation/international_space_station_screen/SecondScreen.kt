@@ -1,4 +1,4 @@
-package com.space.conquestofspace.presentation.second_screen
+package com.space.conquestofspace.presentation.international_space_station_screen
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -8,11 +8,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
 @Composable
-fun SecondScreen(){
+fun InternationalSpaceStationScreen(){
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        Text(text = "Second Screen")
+        Text(text = "ISS Screen")
     }
 }
