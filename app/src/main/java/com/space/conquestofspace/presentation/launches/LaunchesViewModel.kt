@@ -1,10 +1,10 @@
-package com.space.conquestofspace.presentation.launch_list
+package com.space.conquestofspace.presentation.launches
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.space.conquestofspace.domain.use_case.get_launches.GetLaunchesUseCase
+import com.space.conquestofspace.domain.usecase.getlaunches.GetLaunchesUseCase
 import com.space.core.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject

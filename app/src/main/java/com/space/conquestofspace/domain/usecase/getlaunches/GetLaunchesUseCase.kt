@@ -1,4 +1,4 @@
-package com.space.conquestofspace.domain.use_case.get_launches
+package com.space.conquestofspace.domain.usecase.getlaunches
 
 import com.space.conquestofspace.domain.model.Launch
 import com.space.conquestofspace.domain.repository.MainRepository

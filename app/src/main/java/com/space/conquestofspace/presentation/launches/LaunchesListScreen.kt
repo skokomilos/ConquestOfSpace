@@ -1,4 +1,4 @@
-package com.space.conquestofspace.presentation.launch_list
+package com.space.conquestofspace.presentation.launches
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize

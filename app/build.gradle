@@ -54,7 +54,7 @@ tasks.getByPath("preBuild").dependsOn("ktlintFormat")
 ktlint {
     android = true
     ignoreFailures = false
-    disabledRules = ["no-wildcard-imports "]
+    disabledRules = ["no-wildcard-imports, annotation"]
     reporters {
         reporter "plain"
         reporter "checkstyle"

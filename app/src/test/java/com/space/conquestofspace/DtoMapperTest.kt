@@ -36,7 +36,8 @@ class DtoMapperTest {
                 id = 1
             ),
             pad = PadDTO(
-                id = 1, url = "url", agency_id = Any(), name = "name", info_url = Any(), wiki_url = "wiki_url",
+                id = 1, url = "url", agency_id = Any(), name = "name", info_url = Any(),
+                wiki_url = "wiki_url",
                 location = LocationDTO(
                     id = 1,
                     url = "url",

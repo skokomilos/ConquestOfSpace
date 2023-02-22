@@ -1,4 +1,4 @@
-package com.space.conquestofspace.domain.use_case.get_iss
+package com.space.conquestofspace.domain.usecase.getiss
 
 import com.space.conquestofspace.data.remote.dto.iss.SpaceStationResponse
 import com.space.conquestofspace.domain.repository.MainRepository

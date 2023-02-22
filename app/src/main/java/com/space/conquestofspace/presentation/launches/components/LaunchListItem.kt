@@ -1,4 +1,4 @@
-package com.space.conquestofspace.presentation.launch_list
+package com.space.conquestofspace.presentation.launches
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

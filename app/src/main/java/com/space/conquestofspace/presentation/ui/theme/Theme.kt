@@ -21,7 +21,10 @@ private val LightColorPalette = lightColors(
 )
 
 @Composable
-fun ConquestOfSpaceAppTheme(darkTheme: Boolean = true, content: @Composable() () -> Unit) {
+fun ConquestOfSpaceAppTheme(
+    darkTheme: Boolean = true,
+    content: @Composable() () -> Unit
+) {
     val colors = if (darkTheme) {
         DarkColorPalette
     } else {

@@ -1,4 +1,4 @@
-package com.space.conquestofspace.presentation.bottom_nav_menu
+package com.space.conquestofspace.presentation.bottommenu
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email

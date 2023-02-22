@@ -1,12 +1,12 @@
-package com.space.conquestofspace.presentation.bottom_nav_menu
+package com.space.conquestofspace.presentation.bottommenu
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.space.conquestofspace.presentation.international_space_station_screen.InternationalSpaceStationScreen
-import com.space.conquestofspace.presentation.launch_list.LaunchesListScreen
-import com.space.conquestofspace.presentation.third_screen.ThirdScreen
+import com.space.conquestofspace.presentation.iss.InternationalSpaceStationScreen
+import com.space.conquestofspace.presentation.launches.LaunchesListScreen
+import com.space.conquestofspace.presentation.thirdscreen.ThirdScreen
 
 @Composable
 fun BottomNavGraph(navHostController: NavHostController) {

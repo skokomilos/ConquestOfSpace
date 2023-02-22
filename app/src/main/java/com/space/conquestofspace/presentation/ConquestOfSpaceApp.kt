@@ -3,8 +3,8 @@ package com.space.conquestofspace.presentation
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.rememberNavController
-import com.space.conquestofspace.presentation.bottom_nav_menu.BottomNavGraph
-import com.space.conquestofspace.presentation.bottom_nav_menu.BottomNavigationBar
+import com.space.conquestofspace.presentation.bottommenu.BottomNavGraph
+import com.space.conquestofspace.presentation.bottommenu.BottomNavigationBar
 
 @Composable
 fun ConquestOfSpaceApp() {

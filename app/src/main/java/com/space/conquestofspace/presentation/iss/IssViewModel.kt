@@ -1,10 +1,10 @@
-package com.space.conquestofspace.presentation.international_space_station_screen
+package com.space.conquestofspace.presentation.iss
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.space.conquestofspace.domain.use_case.get_iss.GetIssUseCase
+import com.space.conquestofspace.domain.usecase.getiss.GetIssUseCase
 import com.space.core.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject

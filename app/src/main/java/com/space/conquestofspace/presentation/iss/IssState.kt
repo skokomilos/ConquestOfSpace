@@ -1,4 +1,4 @@
-package com.space.conquestofspace.presentation.international_space_station_screen
+package com.space.conquestofspace.presentation.iss
 
 import com.space.conquestofspace.data.remote.dto.iss.SpaceStationResponse
 

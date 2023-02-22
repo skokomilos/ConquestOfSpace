@@ -1,4 +1,4 @@
-package com.space.conquestofspace.presentation.bottom_nav_menu
+package com.space.conquestofspace.presentation.bottommenu
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.RowScope
