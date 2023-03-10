@@ -134,15 +134,15 @@ private fun IssCrew(
     modifier: Modifier = Modifier
 ) {
     LazyRow(
-        modifier = modifier.padding(
-            start = 24.dp,
-            end = 24.dp
-        )
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        contentPadding = PaddingValues(horizontal = 16.dp),
+        modifier = modifier
     ) {
         items(crew) { crewMember ->
             AstronautItem(
                 imageUrl = crewMember.astronaut.profile_image,
-                astronautName = crewMember.astronaut.name
+                astronautName = crewMember.astronaut.name,
+                modifier = modifier
             )
         }
     }
@@ -162,11 +162,11 @@ private fun AstronautItem(
             model = imageUrl,
             contentDescription = null
         )
-        Text(
-            text = astronautName,
-            style = MaterialTheme.typography.h3,
-            modifier = Modifier.paddingFromBaseline(top = 24.dp, bottom = 8.dp)
-        )
+//        Text(
+//            text = astronautName,
+//            style = MaterialTheme.typography.h3,
+//            modifier = Modifier.paddingFromBaseline(top = 24.dp, bottom = 8.dp)
+//        )
     }
 }
 
