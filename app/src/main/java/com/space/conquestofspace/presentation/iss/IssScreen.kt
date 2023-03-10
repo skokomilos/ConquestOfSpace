@@ -65,11 +65,11 @@ private fun IssDetailsContent(
     imageUrl: String,
     imageHeight: Dp,
     description: String,
-    crew: List<Crew>?
+    astronauts: List<Crew>?
 ) {
     Column(Modifier.verticalScroll(scrollState)) {
         ConstraintLayout {
-            val (image, info) = createRefs()
+            val (image, info, crew) = createRefs()
             IssImage(
                 imageUrl = imageUrl,
                 modifier = Modifier
@@ -83,7 +83,14 @@ private fun IssDetailsContent(
                 modifier = Modifier.constrainAs(info) { top.linkTo(image.bottom) }
             )
 
-            //crew?.let { IssCrew(crew = it) }
+            crew.let {
+                astronauts?.let { it1 ->
+                    IssCrew(
+                        crew = it1,
+                        modifier = Modifier.constrainAs(crew) { top.linkTo(info.bottom) }
+                    )
+                }
+            }
         }
     }
 }
