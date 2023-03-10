@@ -54,7 +54,7 @@ tasks.getByPath("preBuild").dependsOn("ktlintFormat")
 ktlint {
     android = true
     ignoreFailures = false
-    disabledRules = ["no-wildcard-imports, annotation"]
+    disabledRules = ["no-wildcard-imports, annotation, max-line-length"]
     reporters {
         reporter "plain"
         reporter "checkstyle"
@@ -121,6 +121,11 @@ dependencies {
     implementation "com.github.bumptech.glide:glide:4.14.2"
     implementation "com.github.bumptech.glide:compose:1.0.0-alpha.1"
     kapt "com.github.bumptech.glide:compiler:4.12.0"
+
+    // Compatible with Compose Material, includes MdcTheme
+    implementation "com.google.android.material:compose-theme-adapter:$rootProject.compose_theme_version"
+    // Compatible with Compose Material 3, includes Mdc3Theme
+    implementation "com.google.android.material:compose-theme-adapter-3:$rootProject.compose_theme_version"
 
 
 }
