@@ -136,7 +136,7 @@ private fun IssCrew(
     LazyRow(
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         contentPadding = PaddingValues(horizontal = 16.dp),
-        modifier = modifier
+        modifier = modifier.padding(bottom = 220.dp)
     ) {
         items(crew) { crewMember ->
             AstronautItem(
