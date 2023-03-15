@@ -69,7 +69,7 @@ private fun IssDetailsContent(
 ) {
     Column(Modifier.verticalScroll(scrollState)) {
         ConstraintLayout {
-            val (image, info) = createRefs()
+            val (image, info, issCrew) = createRefs()
             IssImage(
                 imageUrl = imageUrl,
                 modifier = Modifier
@@ -83,7 +83,12 @@ private fun IssDetailsContent(
                 modifier = Modifier.constrainAs(info) { top.linkTo(image.bottom) }
             )
 
-            //crew?.let { IssCrew(crew = it) }
+            crew?.let {
+                IssCrew(
+                    crew = it,
+                    modifier = Modifier.constrainAs(issCrew) { top.linkTo(info.bottom) }
+                )
+            }
         }
     }
 }
@@ -129,7 +134,8 @@ private fun IssCrew(
     LazyRow(
         modifier = modifier.padding(
             start = 24.dp,
-            end = 24.dp
+            end = 24.dp,
+            bottom = 200.dp
         )
     ) {
         items(crew) { crewMember ->
