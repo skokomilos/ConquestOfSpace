@@ -1,28 +1,43 @@
 package com.space.conquestofspace.presentation.iss
 
-import androidx.compose.foundation.ScrollState
+import androidx.compose.animation.core.FloatExponentialDecaySpec
+import androidx.compose.animation.core.animateDecay
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
+import androidx.compose.ui.input.nestedscroll.NestedScrollSource
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.Velocity
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.android.material.composethemeadapter.MdcTheme
+import com.space.conquestofspace.R
 import com.space.conquestofspace.data.remote.dto.iss.Crew
+import com.space.conquestofspace.presentation.toolbar.CollapsingToolbar
+import com.space.conquestofspace.presentation.toolbar.ToolbarState
+import com.space.conquestofspace.presentation.toolbar.scrollflags.ScrollState
 import com.space.conquestofspace.presentation.utils.Dimens
+import kotlinx.coroutines.cancelChildren
+import kotlinx.coroutines.launch
 
 @Composable
 fun InternationalSpaceStationScreen(
@@ -35,19 +50,67 @@ fun InternationalSpaceStationScreen(
     }
 }
 
+private val MinToolbarHeight = 96.dp
+private val MaxToolbarHeight = 176.dp
+
+@Composable
+private fun rememberToolbarState(toolbarHeightRange: IntRange): ToolbarState {
+    return rememberSaveable(saver = ScrollState.Saver) {
+        ScrollState(toolbarHeightRange)
+    }
+}
+
 @Composable
 private fun IssDetails(state: IssState) {
     val scrollState = rememberScrollState()
 
+    val toolbarHeightRange = with(LocalDensity.current) {
+        MinToolbarHeight.roundToPx()..MaxToolbarHeight.roundToPx()
+    }
+    val toolbarState = rememberToolbarState(toolbarHeightRange)
+
+    val scope = rememberCoroutineScope()
+
+    val nestedScrollConnection = remember {
+        object : NestedScrollConnection {
+            override fun onPreScroll(available: Offset, source: NestedScrollSource): Offset {
+                toolbarState.scrollOffset = toolbarState.scrollOffset - available.y
+                return Offset(0f, toolbarState.consumed)
+            }
+
+            override suspend fun onPostFling(consumed: Velocity, available: Velocity): Velocity {
+                if (available.y > 0) {
+                    scope.launch {
+                        animateDecay(
+                            initialValue = toolbarState.height + toolbarState.offset,
+                            initialVelocity = available.y,
+                            animationSpec = FloatExponentialDecaySpec()
+                        ) { value, velocity ->
+                            toolbarState.scrollOffset = toolbarState.scrollOffset - (value - (toolbarState.height + toolbarState.offset))
+                            if (toolbarState.scrollOffset == 0f) scope.coroutineContext.cancelChildren()
+                        }
+                    }
+                }
+
+                return super.onPostFling(consumed, available)
+            }
+        }
+    }
+
     Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .systemBarsPadding(),
-        contentAlignment = Alignment.Center
+        modifier = Modifier.nestedScroll(nestedScrollConnection)
     ) {
         state.iss?.let { iss ->
+            CollapsingToolbar(
+                progress = 1f,
+                backgroundImageId = R.mipmap.iss_foreground,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(
+                        MaxToolbarHeight
+                    )
+            )
             IssDetailsContent(
-                scrollState = scrollState,
                 name = iss.name,
                 imageUrl = iss.spacestation.image_url,
                 imageHeight = 278.dp,
@@ -60,27 +123,26 @@ private fun IssDetails(state: IssState) {
 
 @Composable
 private fun IssDetailsContent(
-    scrollState: ScrollState,
     name: String,
     imageUrl: String,
     imageHeight: Dp,
     description: String,
     astronauts: List<Crew>?
 ) {
-    Column(Modifier.verticalScroll(scrollState)) {
+    Column() {
         ConstraintLayout {
-            val (image, info, crew) = createRefs()
-            IssImage(
-                imageUrl = imageUrl,
-                modifier = Modifier
-                    .constrainAs(image) { top.linkTo(parent.top) },
-                imageHeight = imageHeight
-            )
+            val (info, crew) = createRefs()
+//            IssImage(
+//                imageUrl = imageUrl,
+//                modifier = Modifier
+//                    .constrainAs(image) { top.linkTo(parent.top) },
+//                imageHeight = imageHeight
+//            )
 
             IssInformation(
                 name = name,
                 description = description,
-                modifier = Modifier.constrainAs(info) { top.linkTo(image.bottom) }
+                modifier = Modifier.constrainAs(info) { top.linkTo(parent.top) }
             )
 
             crew.let {
@@ -198,7 +260,6 @@ private fun InternationalSpaceStationScreenPreview() {
     MdcTheme {
         Surface {
             IssDetailsContent(
-                scrollState = rememberScrollState(),
                 name = "name",
                 imageUrl = "image_url",
                 imageHeight = 278.dp,
