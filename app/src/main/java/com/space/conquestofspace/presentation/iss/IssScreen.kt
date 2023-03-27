@@ -2,7 +2,9 @@ package com.space.conquestofspace.presentation.iss
 
 import androidx.compose.animation.core.FloatExponentialDecaySpec
 import androidx.compose.animation.core.animateDecay
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
@@ -16,9 +18,11 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
@@ -33,6 +37,7 @@ import com.google.android.material.composethemeadapter.MdcTheme
 import com.space.conquestofspace.R
 import com.space.conquestofspace.data.remote.dto.iss.Crew
 import com.space.conquestofspace.presentation.toolbar.CollapsingToolbar
+import com.space.conquestofspace.presentation.toolbar.FixedScrollFlagState
 import com.space.conquestofspace.presentation.toolbar.ToolbarState
 import com.space.conquestofspace.presentation.toolbar.scrollflags.ScrollState
 import com.space.conquestofspace.presentation.utils.Dimens
@@ -102,20 +107,30 @@ private fun IssDetails(state: IssState) {
     ) {
         state.iss?.let { iss ->
             CollapsingToolbar(
-                progress = 1f,
+                progress = toolbarState.progress,
                 backgroundImageId = R.mipmap.iss_foreground,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(
-                        MaxToolbarHeight
-                    )
+                    .height(with(LocalDensity.current) { toolbarState.height.toDp() })
+                    .graphicsLayer { translationY = toolbarState.offset }
             )
             IssDetailsContent(
                 name = iss.name,
                 imageUrl = iss.spacestation.image_url,
                 imageHeight = 278.dp,
                 description = iss.spacestation.description,
-                iss.crew
+                iss.crew,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .graphicsLayer { translationY = toolbarState.height + toolbarState.offset }
+                    .pointerInput(Unit) {
+                        detectTapGestures(
+                            onPress = { scope.coroutineContext.cancelChildren() }
+                        )
+                    },
+                contentPadding = PaddingValues(
+                    bottom = if (toolbarState is FixedScrollFlagState) MinToolbarHeight else 0.dp
+                )
             )
         }
     }
@@ -127,11 +142,17 @@ private fun IssDetailsContent(
     imageUrl: String,
     imageHeight: Dp,
     description: String,
-    astronauts: List<Crew>?
+    astronauts: List<Crew>?,
+    modifier: Modifier = Modifier,
+    contentPadding: PaddingValues = PaddingValues(0.dp)
 ) {
-    Column() {
-        ConstraintLayout {
-            val (info, crew) = createRefs()
+    LazyColumn(
+        contentPadding = contentPadding,
+        modifier = modifier
+    ) {
+        item {
+            ConstraintLayout {
+                val (info, crew) = createRefs()
 //            IssImage(
 //                imageUrl = imageUrl,
 //                modifier = Modifier
@@ -139,18 +160,19 @@ private fun IssDetailsContent(
 //                imageHeight = imageHeight
 //            )
 
-            IssInformation(
-                name = name,
-                description = description,
-                modifier = Modifier.constrainAs(info) { top.linkTo(parent.top) }
-            )
+                IssInformation(
+                    name = name,
+                    description = description,
+                    modifier = Modifier.constrainAs(info) { top.linkTo(parent.top) }
+                )
 
-            crew.let {
-                astronauts?.let { it1 ->
-                    IssCrew(
-                        crew = it1,
-                        modifier = Modifier.constrainAs(crew) { top.linkTo(info.bottom) }
-                    )
+                crew.let {
+                    astronauts?.let { it1 ->
+                        IssCrew(
+                            crew = it1,
+                            modifier = Modifier.constrainAs(crew) { top.linkTo(info.bottom) }
+                        )
+                    }
                 }
             }
         }

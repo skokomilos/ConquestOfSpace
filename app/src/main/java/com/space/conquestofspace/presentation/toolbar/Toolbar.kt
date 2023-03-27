@@ -6,10 +6,10 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
@@ -61,12 +61,13 @@ fun CollapsingToolbar(
             Image(
                 painter = painterResource(id = backgroundImageId),
                 contentDescription = null,
+                contentScale = ContentScale.FillWidth,
                 modifier = Modifier
                     .fillMaxSize()
                     .graphicsLayer {
-                        alpha = progress * 0.75f
-                    },
-                alignment = BiasAlignment(0f, 1f - ((1f - progress) * 0.75f))
+                        alpha = progress * 0.95f
+                    }
+                //  alignment = BiasAlignment(0f, 1f - ((1f - progress) * 0.75f))
             )
         }
 
