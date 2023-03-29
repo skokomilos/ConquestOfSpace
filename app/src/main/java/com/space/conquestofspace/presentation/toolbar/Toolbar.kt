@@ -4,17 +4,21 @@ import android.util.Log
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.LocalTextStyle
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.StrokeJoin
+import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.ExperimentalTextApi
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -40,6 +44,7 @@ fun CollapsingToolbarPreview() {
     }
 }
 
+@OptIn(ExperimentalTextApi::class)
 @Composable
 fun CollapsingToolbar(
     progress: Float,
@@ -113,11 +118,13 @@ fun CollapsingToolbar(
                 )
                 Text(
                     text = "Station",
-                    style = TextStyle(
-                        fontSize = 30.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = Color.White,
-                        textAlign = TextAlign.Center
+                    style = LocalTextStyle.current.merge(
+                        TextStyle(
+                            drawStyle = Stroke(width = 6f, join = StrokeJoin.Round),
+                            fontSize = 30.sp,
+                            color = Color.Black,
+                            textAlign = TextAlign.Center
+                        )
                     ),
                     modifier = Modifier
                         .padding(logoPadding)
