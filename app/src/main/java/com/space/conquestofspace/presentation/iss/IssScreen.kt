@@ -33,7 +33,7 @@ import androidx.compose.ui.unit.Velocity
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.google.android.material.composethemeadapter.MdcTheme
+import com.google.accompanist.themeadapter.material.MdcTheme
 import com.space.conquestofspace.R
 import com.space.conquestofspace.data.remote.dto.iss.Crew
 import com.space.conquestofspace.presentation.toolbar.CollapsingToolbar
