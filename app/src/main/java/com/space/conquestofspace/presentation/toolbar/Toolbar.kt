@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalTextApi::class)
+
 package com.space.conquestofspace.presentation.toolbar
 
 import android.util.Log
@@ -10,10 +12,9 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.StrokeJoin
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.*
 import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.platform.LocalDensity
@@ -26,6 +27,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.util.lerp
+import com.google.accompanist.themeadapter.material.MdcTheme
 import com.space.conquestofspace.R
 import com.space.conquestofspace.presentation.ui.theme.ConquestOfSpaceAppTheme
 import kotlin.math.roundToInt
@@ -91,44 +93,24 @@ fun CollapsingToolbar(
             CollapsingToolbarLayout(progress = progress) {
                 Text(
                     text = "International",
-                    style = TextStyle(
-                        fontSize = 30.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = Color.White,
-                        textAlign = TextAlign.Center
-                    ),
+                    style = toolbarHeadlineInterpolation(progress),
                     modifier = Modifier
                         .padding(logoPadding)
-                        .height(32.dp)
                         .wrapContentWidth()
                     // .graphicsLayer { alpha = ((0.25f - progress) * 4).coerceIn(0f, 1f) }
                 )
                 Text(
                     text = "Space",
-                    style = TextStyle(
-                        fontSize = 30.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = Color.White,
-                        textAlign = TextAlign.Center
-                    ),
+                    style = toolbarHeadlineInterpolation(progress),
                     modifier = Modifier
                         .padding(logoPadding)
-                        .height(32.dp)
                         .wrapContentWidth()
                 )
                 Text(
                     text = "Station",
-                    style = LocalTextStyle.current.merge(
-                        TextStyle(
-                            drawStyle = Stroke(width = 6f, join = StrokeJoin.Round),
-                            fontSize = 30.sp,
-                            color = Color.Black,
-                            textAlign = TextAlign.Center
-                        )
-                    ),
+                    style = toolbarHeadlineInterpolation(progress),
                     modifier = Modifier
                         .padding(logoPadding)
-                        .height(32.dp)
                         .wrapContentWidth()
                 )
 //                Image(
@@ -163,6 +145,33 @@ fun CollapsingToolbar(
         }
     }
 }
+
+@Composable
+@OptIn(ExperimentalTextApi::class)
+private fun toolbarHeadlineInterpolation(progress: Float) =
+    if (progress >= 0.50f) {
+        val offset = Offset(5.0f, 10.0f)
+        LocalTextStyle.current.merge(
+            TextStyle(
+                //    drawStyle = Stroke(width = 6f, join = StrokeJoin.Round),
+//                shadow = Shadow(
+//                    color = Color(R.color.blue_neon),
+//                    offset = offset,
+//                    blurRadius = 3f
+//                ),
+                fontSize = 30.sp,
+                color = Color(R.color.purple_neon),
+                textAlign = TextAlign.Center
+            )
+        )
+    } else {
+        TextStyle(
+            fontSize = 30.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color.White,
+            textAlign = TextAlign.Center
+        )
+    }
 
 @Composable
 private fun CollapsingToolbarLayout(
