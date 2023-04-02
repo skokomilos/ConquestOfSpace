@@ -22,6 +22,7 @@ fun BottomNavGraph(navHostController: NavHostController) {
             InternationalSpaceStationScreen(
                 onAstronautClick = {
                     Log.d("TAG", "BottomNavGraph: ${it.astronaut.name}")
+                    //navController.navigate("astronautDetail/$(it.astronaut")
                 }
             )
         }
