@@ -41,7 +41,7 @@ android {
         compose true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion  "1.4.0"
+        kotlinCompilerExtensionVersion  "1.4.4"
     }
 
     buildFeatures {
@@ -66,13 +66,13 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
 
     implementation 'androidx.core:core-ktx:1.9.0'
-    implementation 'androidx.appcompat:appcompat:1.6.0'
-    implementation 'com.google.android.material:material:1.8.0'
-    implementation "androidx.constraintlayout:constraintlayout-compose:1.1.0-alpha07"
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation "androidx.constraintlayout:constraintlayout-compose:1.1.0-alpha09"
     implementation "androidx.compose.ui:ui:$compose_version"
+    implementation "androidx.compose.ui:ui-util:$compose_version"
     implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
     implementation "androidx.compose.material:material:$compose_version"
-    implementation 'androidx.activity:activity-compose:1.6.1'
+    implementation 'androidx.activity:activity-compose:1.7.0'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
@@ -82,7 +82,6 @@ dependencies {
 
     // Compose dependencies
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
-    debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
     implementation "io.coil-kt:coil-compose:1.4.0"
 
@@ -116,16 +115,16 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.coroutinesVersion"
 
     // Coroutine Lifecycle Scopes
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1"
 
     implementation "com.github.bumptech.glide:glide:4.14.2"
     implementation "com.github.bumptech.glide:compose:1.0.0-alpha.1"
     kapt "com.github.bumptech.glide:compiler:4.12.0"
 
     // Compatible with Compose Material, includes MdcTheme
-    implementation "com.google.android.material:compose-theme-adapter:$rootProject.compose_theme_version"
+    implementation "com.google.accompanist:accompanist-themeadapter-material:$rootProject.compose_theme_version"
     // Compatible with Compose Material 3, includes Mdc3Theme
-    implementation "com.google.android.material:compose-theme-adapter-3:$rootProject.compose_theme_version"
+    implementation "com.google.accompanist:accompanist-themeadapter-material3:$rootProject.compose_theme_version"
 
 
 }
