@@ -6,10 +6,7 @@ import android.util.Log
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.LocalTextStyle
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
@@ -27,7 +24,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.util.lerp
-import com.google.accompanist.themeadapter.material.MdcTheme
 import com.space.conquestofspace.R
 import com.space.conquestofspace.presentation.ui.theme.ConquestOfSpaceAppTheme
 import kotlin.math.roundToInt
@@ -153,21 +149,21 @@ private fun toolbarHeadlineInterpolation(progress: Float) =
         val offset = Offset(5.0f, 10.0f)
         LocalTextStyle.current.merge(
             TextStyle(
-                //    drawStyle = Stroke(width = 6f, join = StrokeJoin.Round),
-//                shadow = Shadow(
-//                    color = Color(R.color.blue_neon),
-//                    offset = offset,
-//                    blurRadius = 3f
-//                ),
+                drawStyle = Stroke(width = 6f, join = StrokeJoin.Round),
+                shadow = Shadow(
+                    color = Color(R.color.purple_200),
+                    offset = offset,
+                    blurRadius = 3f
+                ),
                 fontSize = 30.sp,
-                color = Color(R.color.purple_neon),
+                color = Color(R.color.purple_200),
+                fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Center
             )
         )
     } else {
         TextStyle(
             fontSize = 30.sp,
-            fontWeight = FontWeight.Bold,
             color = Color.White,
             textAlign = TextAlign.Center
         )

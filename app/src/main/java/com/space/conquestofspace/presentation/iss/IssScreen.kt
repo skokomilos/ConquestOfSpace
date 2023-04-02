@@ -1,16 +1,17 @@
+@file:OptIn(ExperimentalMaterialApi::class)
+
 package com.space.conquestofspace.presentation.iss
 
 import androidx.compose.animation.core.FloatExponentialDecaySpec
 import androidx.compose.animation.core.animateDecay
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -46,12 +47,13 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun InternationalSpaceStationScreen(
-    viewModel: IssViewModel = hiltViewModel()
+    viewModel: IssViewModel = hiltViewModel(),
+    onAstronautClick: (Crew) -> Unit
 ) {
     val state = viewModel.state.value
 
     Surface {
-        IssDetails(state = state)
+        IssDetails(state = state, onAstronautClick = onAstronautClick)
     }
 }
 
@@ -66,7 +68,10 @@ private fun rememberToolbarState(toolbarHeightRange: IntRange): ToolbarState {
 }
 
 @Composable
-private fun IssDetails(state: IssState) {
+private fun IssDetails(
+    state: IssState,
+    onAstronautClick: (Crew) -> Unit
+) {
     val scrollState = rememberScrollState()
 
     val toolbarHeightRange = with(LocalDensity.current) {
@@ -119,7 +124,8 @@ private fun IssDetails(state: IssState) {
                 imageUrl = iss.spacestation.image_url,
                 imageHeight = 278.dp,
                 description = iss.spacestation.description,
-                iss.crew,
+                astronauts = iss.crew,
+                onAstronautClick = onAstronautClick,
                 modifier = Modifier
                     .fillMaxSize()
                     .graphicsLayer { translationY = toolbarState.height + toolbarState.offset }
@@ -143,6 +149,7 @@ private fun IssDetailsContent(
     imageHeight: Dp,
     description: String,
     astronauts: List<Crew>?,
+    onAstronautClick: (Crew) -> Unit,
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(0.dp)
 ) {
@@ -170,6 +177,7 @@ private fun IssDetailsContent(
                     astronauts?.let { it1 ->
                         IssCrew(
                             crew = it1,
+                            onAstronautClick = onAstronautClick,
                             modifier = Modifier.constrainAs(crew) { top.linkTo(info.bottom) }
                         )
                     }
@@ -215,6 +223,7 @@ private fun IssDescription(description: String) {
 @Composable
 private fun IssCrew(
     crew: List<Crew>,
+    onAstronautClick: (Crew) -> Unit,
     modifier: Modifier = Modifier
 ) {
     LazyRow(
@@ -223,34 +232,44 @@ private fun IssCrew(
         modifier = modifier.padding(bottom = 220.dp)
     ) {
         items(crew) { crewMember ->
-            AstronautItem(
-                imageUrl = crewMember.astronaut.profile_image,
-                astronautName = crewMember.astronaut.name,
-                modifier = modifier
-            )
+            Surface(modifier = Modifier.clickable { }) {
+                AstronautItem(
+                    astronaut = crewMember,
+                    imageUrl = crewMember.astronaut.profile_image,
+                    astronautName = crewMember.astronaut.name,
+                    onAstronautClick = onAstronautClick,
+                    modifier = modifier
+                )
+            }
         }
     }
 }
 
 @Composable
 private fun AstronautItem(
+    astronaut: Crew,
     imageUrl: String,
     astronautName: String,
+    onAstronautClick: (Crew) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Column(
-        modifier = modifier,
-        horizontalAlignment = Alignment.CenterHorizontally
+    Card(
+        onClick = { onAstronautClick(astronaut) }
     ) {
-        PersonImage(
-            model = imageUrl,
-            contentDescription = null
-        )
+        Column(
+            modifier = modifier,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            PersonImage(
+                model = imageUrl,
+                contentDescription = null
+            )
 //        Text(
 //            text = astronautName,
 //            style = MaterialTheme.typography.h3,
 //            modifier = Modifier.paddingFromBaseline(top = 24.dp, bottom = 8.dp)
 //        )
+        }
     }
 }
 
@@ -286,7 +305,8 @@ private fun InternationalSpaceStationScreenPreview() {
                 imageUrl = "image_url",
                 imageHeight = 278.dp,
                 description = "The International Space Station (ISS) is a habitable artificial satellite in low Earth orbit that has been continuously inhabited since 2000. It is the largest human-made body in low Earth orbit and has various components, including habitation modules, solar arrays, and experiment bays. The station is expected to operate until 2030 and is regularly visible from Earth.",
-                null
+                null,
+                onAstronautClick = {}
             )
         }
     }

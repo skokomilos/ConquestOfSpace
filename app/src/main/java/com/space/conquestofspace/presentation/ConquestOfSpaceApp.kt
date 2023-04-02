@@ -14,6 +14,8 @@ fun ConquestOfSpaceApp() {
     Scaffold(
         bottomBar = { BottomNavigationBar(navController = navController) }
     ) {
-        BottomNavGraph(navHostController = navController)
+        BottomNavGraph(
+            navHostController = navController
+        )
     }
 }
