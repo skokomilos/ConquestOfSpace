@@ -1,5 +1,6 @@
 package com.space.conquestofspace.domain.repository
 
+import com.space.conquestofspace.data.remote.dto.astronaut.AstronautResponse
 import com.space.conquestofspace.data.remote.dto.iss.SpaceStationResponse
 import com.space.conquestofspace.domain.model.Launch
 import com.space.core.util.Resource
@@ -10,4 +11,6 @@ interface MainRepository {
     fun getLaunches(currentTime: String): Flow<Resource<List<Launch>>>
 
     fun getIss(): Flow<Resource<SpaceStationResponse>>
+
+    fun getAstronautById(id: Int): Flow<Resource<AstronautResponse>>
 }

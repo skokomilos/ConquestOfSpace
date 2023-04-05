@@ -2,6 +2,7 @@ package com.space.conquestofspace.data.repository
 
 import com.space.conquestofspace.data.local.dao.LaunchDao
 import com.space.conquestofspace.data.remote.TheSpaceDevApi
+import com.space.conquestofspace.data.remote.dto.astronaut.AstronautResponse
 import com.space.conquestofspace.data.remote.dto.iss.SpaceStationResponse
 import com.space.conquestofspace.domain.model.Launch
 import com.space.conquestofspace.domain.repository.MainRepository
@@ -52,6 +53,21 @@ class LaunchRepositoryImpl(
         try {
             val iss = api.getLatestISSExpedition()
             emit(Resource.Success(iss))
+        } catch (e: java.lang.Exception) {
+            emit(
+                Resource.Error(
+                    message = "General error"
+                )
+            )
+        }
+    }
+
+    override fun getAstronautById(id: Int): Flow<Resource<AstronautResponse>> = flow {
+        emit(Resource.Loading())
+
+        try {
+            val astronaut = api.getAstronautById(id)
+            emit(Resource.Success(astronaut))
         } catch (e: java.lang.Exception) {
             emit(
                 Resource.Error(

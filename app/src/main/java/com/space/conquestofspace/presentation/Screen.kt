@@ -8,4 +8,5 @@ sealed class Screen(val route: String) {
     object LaunchListScreen : Screen("launch_list_screen")
     object LaunchDetailScreen : Screen("launch_detail_screen")
     object IssScreen : Screen("iss_screen")
+    object AstronautDetailScreen : Screen("astronaut_detail_screen")
 }

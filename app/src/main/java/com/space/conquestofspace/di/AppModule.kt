@@ -4,6 +4,7 @@ import com.space.conquestofspace.data.local.dao.LaunchDao
 import com.space.conquestofspace.data.remote.TheSpaceDevApi
 import com.space.conquestofspace.data.repository.LaunchRepositoryImpl
 import com.space.conquestofspace.domain.repository.MainRepository
+import com.space.conquestofspace.domain.usecase.GetAstronautUseCase
 import com.space.conquestofspace.domain.usecase.getiss.GetIssUseCase
 import com.space.conquestofspace.domain.usecase.getlaunches.GetLaunchesUseCase
 import dagger.Module
@@ -35,5 +36,11 @@ object AppModule {
     @Singleton
     fun provideIssUseCase(repository: MainRepository): GetIssUseCase {
         return GetIssUseCase(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideAstronautUseCase(repository: MainRepository): GetAstronautUseCase {
+        return GetAstronautUseCase(repository)
     }
 }
