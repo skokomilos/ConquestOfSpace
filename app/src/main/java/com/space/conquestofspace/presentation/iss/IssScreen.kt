@@ -2,6 +2,7 @@
 
 package com.space.conquestofspace.presentation.iss
 
+import androidx.compose.animation.AnimatedVisibilityScope
 import androidx.compose.animation.core.FloatExponentialDecaySpec
 import androidx.compose.animation.core.animateDecay
 import androidx.compose.foundation.clickable
@@ -34,7 +35,8 @@ import androidx.compose.ui.unit.Velocity
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.google.accompanist.themeadapter.material.MdcTheme
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.space.conquestofspace.R
 import com.space.conquestofspace.data.remote.dto.iss.Crew
 import com.space.conquestofspace.presentation.toolbar.CollapsingToolbar
@@ -45,15 +47,17 @@ import com.space.conquestofspace.presentation.utils.Dimens
 import kotlinx.coroutines.cancelChildren
 import kotlinx.coroutines.launch
 
+@Destination
 @Composable
-fun InternationalSpaceStationScreen(
+fun AnimatedVisibilityScope.InternationalSpaceStationScreen(
     viewModel: IssViewModel = hiltViewModel(),
-    onAstronautClick: (Crew) -> Unit
+    navigator: DestinationsNavigator
+    // onAstronautClick: (Crew) -> Unit
 ) {
     val state = viewModel.state.value
 
     Surface {
-        IssDetails(state = state, onAstronautClick = onAstronautClick)
+        IssDetails(state = state)
     }
 }
 
@@ -69,8 +73,8 @@ private fun rememberToolbarState(toolbarHeightRange: IntRange): ToolbarState {
 
 @Composable
 private fun IssDetails(
-    state: IssState,
-    onAstronautClick: (Crew) -> Unit
+    state: IssState
+    // navigator: DestinationsNavigator
 ) {
     val scrollState = rememberScrollState()
 
@@ -125,7 +129,7 @@ private fun IssDetails(
                 imageHeight = 278.dp,
                 description = iss.spacestation.description,
                 astronauts = iss.crew,
-                onAstronautClick = onAstronautClick,
+                //   navigator = navigator,
                 modifier = Modifier
                     .fillMaxSize()
                     .graphicsLayer { translationY = toolbarState.height + toolbarState.offset }
@@ -149,7 +153,7 @@ private fun IssDetailsContent(
     imageHeight: Dp,
     description: String,
     astronauts: List<Crew>?,
-    onAstronautClick: (Crew) -> Unit,
+    // navigator: DestinationsNavigator,
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(0.dp)
 ) {
@@ -177,7 +181,7 @@ private fun IssDetailsContent(
                     astronauts?.let { it1 ->
                         IssCrew(
                             crew = it1,
-                            onAstronautClick = onAstronautClick,
+                            //  navigator = navigator,
                             modifier = Modifier.constrainAs(crew) { top.linkTo(info.bottom) }
                         )
                     }
@@ -223,7 +227,7 @@ private fun IssDescription(description: String) {
 @Composable
 private fun IssCrew(
     crew: List<Crew>,
-    onAstronautClick: (Crew) -> Unit,
+    // navigator: DestinationsNavigator,
     modifier: Modifier = Modifier
 ) {
     LazyRow(
@@ -237,7 +241,7 @@ private fun IssCrew(
                     astronaut = crewMember,
                     imageUrl = crewMember.astronaut.profile_image,
                     astronautName = crewMember.astronaut.name,
-                    onAstronautClick = onAstronautClick,
+                    //  navigator = navigator,
                     modifier = modifier
                 )
             }
@@ -250,11 +254,11 @@ private fun AstronautItem(
     astronaut: Crew,
     imageUrl: String,
     astronautName: String,
-    onAstronautClick: (Crew) -> Unit,
+    // navigator: DestinationsNavigator,
     modifier: Modifier = Modifier
 ) {
     Card(
-        onClick = { onAstronautClick(astronaut) }
+        // onClick = { navigator.navigate(astronaut) }
     ) {
         Column(
             modifier = modifier,
@@ -298,16 +302,16 @@ private fun IssImage(
 @Composable
 @Preview(showSystemUi = true)
 private fun InternationalSpaceStationScreenPreview() {
-    MdcTheme {
-        Surface {
-            IssDetailsContent(
-                name = "name",
-                imageUrl = "image_url",
-                imageHeight = 278.dp,
-                description = "The International Space Station (ISS) is a habitable artificial satellite in low Earth orbit that has been continuously inhabited since 2000. It is the largest human-made body in low Earth orbit and has various components, including habitation modules, solar arrays, and experiment bays. The station is expected to operate until 2030 and is regularly visible from Earth.",
-                null,
-                onAstronautClick = {}
-            )
-        }
-    }
+//    MdcTheme {
+//        Surface {
+//            IssDetailsContent(
+//                name = "name",
+//                imageUrl = "image_url",
+//                imageHeight = 278.dp,
+//                description = "The International Space Station (ISS) is a habitable artificial satellite in low Earth orbit that has been continuously inhabited since 2000. It is the largest human-made body in low Earth orbit and has various components, including habitation modules, solar arrays, and experiment bays. The station is expected to operate until 2030 and is regularly visible from Earth.",
+//                null,
+//                onAstronautClick = {}
+//            )
+//        }
+//    }
 }

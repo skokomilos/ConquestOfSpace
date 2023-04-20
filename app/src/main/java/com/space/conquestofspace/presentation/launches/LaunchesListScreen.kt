@@ -15,14 +15,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.annotation.RootNavGraph
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 /**
  *
  * @author berka on 2/4/23
  */
+@RootNavGraph(start = true)
+@Destination
 @Composable
 fun LaunchesListScreen(
-    // navController: NavController,
+    navigator: DestinationsNavigator,
     viewModel: LaunchesViewModel = hiltViewModel()
 ) {
     val state = viewModel.state.value

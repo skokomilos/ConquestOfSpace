@@ -1,15 +1,16 @@
 package com.space.conquestofspace.presentation.iss
 
 import androidx.compose.foundation.ScrollState
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -31,12 +32,15 @@ fun AstronautDetailScreen(
 
 @Composable
 fun AstronautDetails(state: AstronautState) {
-    Box(
-        modifier = Modifier.fillMaxWidth()
-    ) {
-        state.astronaut?.let {
+    state.astronaut?.let {
+        Column(
+            modifier = Modifier.fillMaxSize()
+                .background(Color.Magenta),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
             Text(
-                text = it.name,
+                text = "Milos Skoko",
                 textAlign = TextAlign.Center,
                 fontSize = 20.sp
             )
