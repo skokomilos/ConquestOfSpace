@@ -5,7 +5,7 @@ plugins {
     id 'dagger.hilt.android.plugin'
     id 'androidx.navigation.safeargs.kotlin'
     id "org.jlleitschuh.gradle.ktlint" version "11.2.0"
-    id 'com.google.devtools.ksp' version '1.8.20-1.0.10' // Depends on your kotlin version
+    id 'com.google.devtools.ksp' version '1.8.20-1.0.11' // Depends on your kotlin version
 
 }
 
@@ -45,23 +45,21 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = JavaVersion.VERSION_17
     }
     buildFeatures {
         compose true
+        viewBinding true
+        buildConfig true
     }
     composeOptions {
         kotlinCompilerExtensionVersion '1.4.5'
     }
     namespace 'com.space.conquestofspace'
-
-    buildFeatures {
-        viewBinding true
-    }
 }
 
 tasks.getByPath("preBuild").dependsOn("ktlintFormat")
@@ -87,7 +85,7 @@ dependencies {
     implementation "androidx.compose.ui:ui-util:$compose_version"
     implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
     implementation "androidx.compose.material:material:$compose_version"
-    implementation 'androidx.activity:activity-compose:1.7.0'
+    implementation 'androidx.activity:activity-compose:1.7.1'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'

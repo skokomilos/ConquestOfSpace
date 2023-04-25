@@ -12,7 +12,7 @@ buildscript {
         appCompatVersion = '1.1.0'
         fragmentVersion = '1.5.5'
         coroutinesVersion = "1.4.2"
-        navigationVersion = '2.5.3'
+        navigationVersion = '2.6.0-beta01'
         ktxVersion = '1.0.2'
         materialVersion = '1.2.0'
         gsonVersion = '2.9.0'
@@ -22,8 +22,8 @@ buildscript {
         glideVersion = '4.10.0'
         lifecycleVersion = '2.2.0'
         constraintLayoutVersion = '2.0.0-beta3'
-        roomVersion = '2.5.0'
-        compose_version = '1.5.0-alpha02'
+        roomVersion = '2.5.1'
+        compose_version = '1.5.0-alpha03'
         compose_theme_version = '0.30.0'
     }
     repositories {
@@ -31,7 +31,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.3.0'
+        classpath 'com.android.tools.build:gradle:8.0.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigationVersion"
         classpath "com.google.dagger:hilt-android-gradle-plugin:$hiltVersion"
