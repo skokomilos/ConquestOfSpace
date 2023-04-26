@@ -2,7 +2,11 @@ package com.space.conquestofspace.presentation.iss
 
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Surface
@@ -17,16 +21,20 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.space.conquestofspace.data.remote.dto.iss.Astronaut
+import com.space.conquestofspace.presentation.ui.theme.ConquestOfSpaceAppTheme
 import com.space.conquestofspace.viewmodels.AstronautDetailsViewModel
 
 @Composable
 fun AstronautDetailScreen(
-    viewModel: AstronautDetailsViewModel = hiltViewModel()
+    viewModel: AstronautDetailsViewModel = hiltViewModel(),
+    astronautId: Int
 ) {
     val state = viewModel.state.value
 
-    Surface() {
-        AstronautDetails(state)
+    ConquestOfSpaceAppTheme {
+        Surface() {
+            AstronautDetails(state)
+        }
     }
 }
 
@@ -34,7 +42,8 @@ fun AstronautDetailScreen(
 fun AstronautDetails(state: AstronautState) {
     state.astronaut?.let {
         Column(
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier
+                .fillMaxSize()
                 .background(Color.Magenta),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
