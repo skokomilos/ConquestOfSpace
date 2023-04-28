@@ -10,9 +10,9 @@ import com.space.conquestofspace.presentation.iss.AstronautState
 import com.space.core.util.Constants.PARAM_ASTRONAUT_ID
 import com.space.core.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import javax.inject.Inject
 
 @HiltViewModel
 class AstronautDetailsViewModel @Inject constructor(
