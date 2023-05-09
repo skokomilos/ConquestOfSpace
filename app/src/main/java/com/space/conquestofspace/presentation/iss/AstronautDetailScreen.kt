@@ -105,14 +105,15 @@ fun AstronautDetailsContent(
                         end.linkTo(parent.end)
                     },
                 name = astronaut.name,
-                imageUrl = astronaut.profile_image_thumbnail
+                imageUrl = astronaut.profile_image_thumbnail,
+                bio = astronaut.bio
             )
         }
     }
 }
 
 @Composable
-fun AstronautsData(modifier: Modifier = Modifier, name: String, imageUrl: String) {
+fun AstronautsData(modifier: Modifier = Modifier, name: String, imageUrl: String, bio: String) {
     Card(
         modifier =
         modifier.padding(8.dp),
@@ -144,6 +145,12 @@ fun AstronautsData(modifier: Modifier = Modifier, name: String, imageUrl: String
                     fontWeight = FontWeight.Bold,
                     style = MaterialTheme.typography.h4,
                     fontSize = 20.sp
+                )
+                Text(
+                    modifier =
+                    Modifier.fillMaxWidth(),
+                    text = bio,
+                    textAlign = TextAlign.Start
                 )
             }
         }
@@ -177,7 +184,8 @@ fun AstronautDetailsPreview() {
                 type = "Government",
                 url = ""
             ),
-            bio = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            bio = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
+                    "\n Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
             date_of_birth = "1979-07-15",
             date_of_death = "null",
             first_flight = "2009-05-11",
