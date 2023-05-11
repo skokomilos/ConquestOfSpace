@@ -5,12 +5,14 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -125,19 +127,37 @@ fun AstronautsData(modifier: Modifier = Modifier, name: String, imageUrl: String
                 .background(Color.Blue)
                 .fillMaxWidth()
                 .height(200.dp)
-                .padding(8.dp),
+                .padding(8.dp)
         ) {
             Column(
                 // horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
-                com.skydoves.landscapist.glide.GlideImage(
-                    imageModel = { imageUrl },
-                    modifier = Modifier
-                        .size(88.dp)
-                        .clip(CircleShape),
-                    previewPlaceholder = R.drawable.astronaut
-                )
+                Row(
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Row(
+                        modifier = Modifier
+                            .padding(8.dp)
+                            .weight(1f)) {
+                        com.skydoves.landscapist.glide.GlideImage(
+                            imageModel = { imageUrl },
+                            modifier = Modifier
+                                .size(88.dp)
+                                .clip(CircleShape),
+                            previewPlaceholder = R.drawable.astronaut
+                        )
+                    }
+                    Row(
+                        modifier = Modifier
+                            .weight(1f)
+                            .padding(6.dp)
+                        , Arrangement.End) {
+                        SocialMediaImage(image = R.drawable.twitter_logo_icon)
+                        SocialMediaImage(image = R.drawable.twitter_logo_icon)
+                        SocialMediaImage(image = R.drawable.twitter_logo_icon)
+                    }
+                }
                 Text(
                     modifier = Modifier.fillMaxWidth(),
                     text = name,
@@ -172,6 +192,25 @@ fun AstronautImage(
     }
 }
 
+@Composable
+fun SocialMediaImage(
+    image: Int
+) {
+    Box(
+        modifier = Modifier
+            .size(48.dp)
+    ) {
+        com.skydoves.landscapist.glide.GlideImage(
+            imageModel = { image },
+            modifier = Modifier
+                .padding(8.dp)
+                .wrapContentSize()
+                .clip(CircleShape),
+            previewPlaceholder = R.drawable.twitter_logo_icon
+        )
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
 fun AstronautDetailsPreview() {
@@ -185,7 +224,7 @@ fun AstronautDetailsPreview() {
                 url = ""
             ),
             bio = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
-                    "\n Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                "\n Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
             date_of_birth = "1979-07-15",
             date_of_death = "null",
             first_flight = "2009-05-11",
