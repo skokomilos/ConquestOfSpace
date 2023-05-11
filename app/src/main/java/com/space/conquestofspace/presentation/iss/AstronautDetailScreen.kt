@@ -2,6 +2,7 @@ package com.space.conquestofspace.presentation.iss
 
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -26,6 +27,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -108,14 +110,26 @@ fun AstronautDetailsContent(
                     },
                 name = astronaut.name,
                 imageUrl = astronaut.profile_image_thumbnail,
-                bio = astronaut.bio
+                bio = astronaut.bio,
+                twitter = astronaut.twitter,
+                instagram = astronaut.instagram,
+                wiki = astronaut.wiki
+
             )
         }
     }
 }
 
 @Composable
-fun AstronautsData(modifier: Modifier = Modifier, name: String, imageUrl: String, bio: String) {
+fun AstronautsData(
+    modifier: Modifier = Modifier,
+    name: String,
+    imageUrl: String,
+    bio: String,
+    twitter: String?,
+    instagram: String?,
+    wiki: String?
+) {
     Card(
         modifier =
         modifier.padding(8.dp),
@@ -139,7 +153,8 @@ fun AstronautsData(modifier: Modifier = Modifier, name: String, imageUrl: String
                     Row(
                         modifier = Modifier
                             .padding(8.dp)
-                            .weight(1f)) {
+                            .weight(1f)
+                    ) {
                         com.skydoves.landscapist.glide.GlideImage(
                             imageModel = { imageUrl },
                             modifier = Modifier
@@ -151,11 +166,15 @@ fun AstronautsData(modifier: Modifier = Modifier, name: String, imageUrl: String
                     Row(
                         modifier = Modifier
                             .weight(1f)
-                            .padding(6.dp)
-                        , Arrangement.End) {
-                        SocialMediaImage(image = R.drawable.twitter_logo_icon)
-                        SocialMediaImage(image = R.drawable.twitter_logo_icon)
-                        SocialMediaImage(image = R.drawable.twitter_logo_icon)
+                            .padding(6.dp),
+                        Arrangement.End
+                    ) {
+                        SocialMediaImage(
+                            image = R.drawable.twitter_logo_icon,
+                            url = twitter
+                        )
+                        SocialMediaImage(image = R.drawable.twitter_logo_icon, url = instagram)
+                        SocialMediaImage(image = R.drawable.twitter_logo_icon, url = wiki)
                     }
                 }
                 Text(
@@ -194,10 +213,17 @@ fun AstronautImage(
 
 @Composable
 fun SocialMediaImage(
-    image: Int
+    image: Int,
+    url: String?
 ) {
+    val uriHandler = LocalUriHandler.current
     Box(
         modifier = Modifier
+            .clickable {
+                if (!url.isNullOrBlank()) {
+                    uriHandler.openUri(url)
+                }
+            }
             .size(48.dp)
     ) {
         com.skydoves.landscapist.glide.GlideImage(
