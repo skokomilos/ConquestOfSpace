@@ -6,6 +6,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,6 +14,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
@@ -96,6 +98,8 @@ fun AstronautDetailsContent(
         ConstraintLayout() {
             val (image, info, card) = createRefs()
 
+            val attributeMap = createAstronautAttributeMap(astronaut)
+
             AstronautImage(
                 imageUrl = astronaut.profile_image
             )
@@ -113,8 +117,11 @@ fun AstronautDetailsContent(
                 bio = astronaut.bio,
                 twitter = astronaut.twitter,
                 instagram = astronaut.instagram,
-                wiki = astronaut.wiki
-
+                wiki = astronaut.wiki,
+                birth = astronaut.date_of_birth,
+                nationality = astronaut.nationality,
+                agency = astronaut.agency,
+                astronautAttributeMap = attributeMap
             )
         }
     }
@@ -128,7 +135,11 @@ fun AstronautsData(
     bio: String,
     twitter: String?,
     instagram: String?,
-    wiki: String?
+    wiki: String?,
+    birth: String,
+    nationality: String,
+    agency: Agency,
+    astronautAttributeMap: Map<AstronautAttribute, Any>
 ) {
     Card(
         modifier =
@@ -140,7 +151,7 @@ fun AstronautsData(
             modifier
                 .background(Color.Blue)
                 .fillMaxWidth()
-                .height(200.dp)
+                .wrapContentHeight()
                 .padding(8.dp)
         ) {
             Column(
@@ -169,12 +180,9 @@ fun AstronautsData(
                             .padding(6.dp),
                         Arrangement.End
                     ) {
-                        SocialMediaImage(
-                            image = R.drawable.twitter_logo_icon,
-                            url = twitter
-                        )
-                        SocialMediaImage(image = R.drawable.twitter_logo_icon, url = instagram)
-                        SocialMediaImage(image = R.drawable.twitter_logo_icon, url = wiki)
+                        SocialMediaImage(image = R.drawable.twitter_logo_icon, url = twitter)
+                        SocialMediaImage(image = R.drawable.icons_instagram, url = instagram)
+                        SocialMediaImage(image = R.drawable.wikipedia_icon, url = wiki)
                     }
                 }
                 Text(
@@ -191,8 +199,10 @@ fun AstronautsData(
                     text = bio,
                     textAlign = TextAlign.Start
                 )
+                BirthdayNationalityAgency(birth, nationality, agency)
             }
         }
+
         // Content of the card goes here
     }
 }
@@ -234,6 +244,69 @@ fun SocialMediaImage(
                 .clip(CircleShape),
             previewPlaceholder = R.drawable.twitter_logo_icon
         )
+    }
+}
+
+@Composable
+fun BirthdayNationalityAgency(birth: String, nationality: String, agency: Agency) {
+    Box(modifier = Modifier) {
+        Row() {
+            SmallCardWithHeadlineAndData("birth", birth, modifier = Modifier.weight(1f))
+            SmallCardWithHeadlineAndData(
+                "nationality",
+                nationality,
+                modifier = Modifier.weight(1f)
+            )
+            SmallCardWithHeadlineAndData("agency", agency.name, modifier = Modifier.weight(1f))
+        }
+    }
+}
+
+@Composable
+fun SmallCardWithHeadlineAndData(
+    headline: String,
+    personalData: String,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier.wrapContentSize(),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            modifier = Modifier
+                .padding(4.dp)
+                .fillMaxWidth(),
+            fontSize = 16.sp,
+            text = headline.uppercase(),
+            color = Color.Gray,
+            textAlign = TextAlign.Center,
+            fontWeight = FontWeight.Bold
+        )
+        Text(
+            modifier = Modifier
+                .padding(4.dp)
+                .fillMaxWidth()
+                .height(IntrinsicSize.Min),
+            fontSize = 14.sp,
+            text = personalData,
+            textAlign = TextAlign.Center
+        )
+    }
+}
+
+@Preview()
+@Composable
+fun SmallCardWithHeadlineAndDataPreview() {
+    SmallCardWithHeadlineAndData("headline", "12/12/2000")
+}
+
+@Preview
+@Composable
+fun BirthdayNationalityAgencyPreview() {
+    Row(modifier = Modifier.wrapContentSize()) {
+        SmallCardWithHeadlineAndData("headline", "12/12/2000", modifier = Modifier.weight(1f))
+        SmallCardWithHeadlineAndData("headline", "12/12/2000", modifier = Modifier.weight(1f))
+        SmallCardWithHeadlineAndData("headline", "12/12/2000", modifier = Modifier.weight(1f))
     }
 }
 
@@ -281,4 +354,17 @@ fun AstronautDetailsPreview() {
         val state = AstronautState(astronaut = astronaut)
         AstronautDetails(state = state)
     }
+}
+enum class AstronautAttribute(val attributeName: String) {
+    BIRTH("birth"),
+    NATIONALITY("nationality"),
+    AGENCY("agency")
+}
+
+fun createAstronautAttributeMap(astronaut: AstronautResponse): Map<AstronautAttribute, Any> {
+    return mapOf(
+        AstronautAttribute.BIRTH to astronaut.date_of_birth,
+        AstronautAttribute.NATIONALITY to astronaut.nationality,
+        AstronautAttribute.AGENCY to astronaut.agency
+    )
 }
