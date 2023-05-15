@@ -149,7 +149,7 @@ fun AstronautsData(
     ) {
         Box(
             modifier
-                .background(Color.Blue)
+                .background(Color.White)
                 .fillMaxWidth()
                 .wrapContentHeight()
                 .padding(8.dp)
@@ -180,8 +180,8 @@ fun AstronautsData(
                             .padding(6.dp),
                         Arrangement.End
                     ) {
-                        SocialMediaImage(image = R.drawable.twitter_logo_icon, url = twitter)
-                        SocialMediaImage(image = R.drawable.icons_instagram, url = instagram)
+                        SocialMediaImage(image = R.drawable.twitter_icon, url = twitter)
+                        SocialMediaImage(image = R.drawable.instagram_icon, url = instagram)
                         SocialMediaImage(image = R.drawable.wikipedia_icon, url = wiki)
                     }
                 }
@@ -191,11 +191,13 @@ fun AstronautsData(
                     textAlign = TextAlign.Start,
                     fontWeight = FontWeight.Bold,
                     style = MaterialTheme.typography.h4,
+                    color = Color.Black,
                     fontSize = 20.sp
                 )
                 Text(
                     modifier =
                     Modifier.fillMaxWidth(),
+                    color = Color.Black,
                     text = bio,
                     textAlign = TextAlign.Start
                 )
@@ -242,7 +244,7 @@ fun SocialMediaImage(
                 .padding(8.dp)
                 .wrapContentSize()
                 .clip(CircleShape),
-            previewPlaceholder = R.drawable.twitter_logo_icon
+            previewPlaceholder = R.drawable.twitter_icon
         )
     }
 }
@@ -287,6 +289,7 @@ fun SmallCardWithHeadlineAndData(
                 .padding(4.dp)
                 .fillMaxWidth()
                 .height(IntrinsicSize.Min),
+            color = Color.Black,
             fontSize = 14.sp,
             text = personalData,
             textAlign = TextAlign.Center
