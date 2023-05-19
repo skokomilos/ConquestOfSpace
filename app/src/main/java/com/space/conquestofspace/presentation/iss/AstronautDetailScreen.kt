@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -76,17 +77,6 @@ fun AstronautDetails(state: AstronautState) {
             )
         }
     }
-    // astronaut id = 546
-    // name = Stephen Bowen
-    /*
-        val agency: Agency,
-        val id: Int,
-        val name: String,
-        val profile_image: String,
-        val profile_image_thumbnail: String,
-        val status: Status,
-        val url: String
-     */
 }
 
 @Composable
@@ -94,35 +84,39 @@ fun AstronautDetailsContent(
     scrollState: ScrollState,
     astronaut: AstronautResponse
 ) {
-    Column(Modifier.verticalScroll(scrollState)) {
-        ConstraintLayout() {
-            val (image, info, card) = createRefs()
+    Box(modifier = Modifier.fillMaxSize()) {
+        AstronautImage(
+            imageUrl = astronaut.profile_image
+        )
+        Column(
+            Modifier
+                .verticalScroll(scrollState)
+                .align(Alignment.BottomCenter)
+        ) {
+            Spacer(Modifier.weight(1f))
+            ConstraintLayout(Modifier.fillMaxHeight()) {
+                val (card) = createRefs()
+                val attributeMap = createAstronautAttributeMap(astronaut)
 
-            val attributeMap = createAstronautAttributeMap(astronaut)
-
-            AstronautImage(
-                imageUrl = astronaut.profile_image
-            )
-            AstronautsData(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .fillMaxHeight()
-                    .constrainAs(card) {
-                        bottom.linkTo(parent.bottom)
-                        start.linkTo(parent.start)
-                        end.linkTo(parent.end)
-                    },
-                name = astronaut.name,
-                imageUrl = astronaut.profile_image_thumbnail,
-                bio = astronaut.bio,
-                twitter = astronaut.twitter,
-                instagram = astronaut.instagram,
-                wiki = astronaut.wiki,
-                birth = astronaut.date_of_birth,
-                nationality = astronaut.nationality,
-                agency = astronaut.agency,
-                astronautAttributeMap = attributeMap
-            )
+                AstronautsData(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .fillMaxHeight()
+                        .constrainAs(card) {
+                            bottom.linkTo(parent.bottom)
+                        },
+                    name = astronaut.name,
+                    imageUrl = astronaut.profile_image_thumbnail,
+                    bio = astronaut.bio,
+                    twitter = astronaut.twitter,
+                    instagram = astronaut.instagram,
+                    wiki = astronaut.wiki,
+                    birth = astronaut.date_of_birth,
+                    nationality = astronaut.nationality,
+                    agency = astronaut.agency,
+                    astronautAttributeMap = attributeMap
+                )
+            }
         }
     }
 }
@@ -155,7 +149,6 @@ fun AstronautsData(
                 .padding(8.dp)
         ) {
             Column(
-                // horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
                 Row(
@@ -216,7 +209,7 @@ fun AstronautImage(
 ) {
     Box(
         modifier
-            .fillMaxWidth()
+            .fillMaxSize()
     ) {
         // SpaceImage(model = imageUrl, contentDescription = null, imageHeight = 200.dp)
         FullScreenImage(imageUrl)
