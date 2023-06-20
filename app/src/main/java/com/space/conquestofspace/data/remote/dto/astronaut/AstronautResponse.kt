@@ -7,12 +7,12 @@ data class AstronautResponse(
     val date_of_birth: String,
     val date_of_death: String,
     val first_flight: String,
-    val flights: List<Flight>,
+    val flights: List<Flight>?,
     val flights_count: Int,
     val id: Int,
     val in_space: Boolean,
-    val instagram: String,
-    val landings: List<Landing>,
+    val instagram: String?,
+    val landings: List<Landing>?,
     val landings_count: Int,
     val last_flight: String,
     val name: String,
@@ -20,8 +20,8 @@ data class AstronautResponse(
     val profile_image: String,
     val profile_image_thumbnail: String,
     val status: StatusXXX,
-    val twitter: String,
+    val twitter: String?,
     val type: TypeX,
     val url: String,
-    val wiki: String
+    val wiki: String?
 )

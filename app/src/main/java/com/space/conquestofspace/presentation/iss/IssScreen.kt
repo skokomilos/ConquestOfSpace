@@ -39,6 +39,7 @@ import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.space.conquestofspace.R
 import com.space.conquestofspace.data.remote.dto.iss.Crew
+import com.space.conquestofspace.presentation.destinations.AstronautDetailActivityDestination
 import com.space.conquestofspace.presentation.toolbar.CollapsingToolbar
 import com.space.conquestofspace.presentation.toolbar.FixedScrollFlagState
 import com.space.conquestofspace.presentation.toolbar.ToolbarState
@@ -57,7 +58,7 @@ fun AnimatedVisibilityScope.InternationalSpaceStationScreen(
     val state = viewModel.state.value
 
     Surface {
-        IssDetails(state = state)
+        IssDetails(state = state, navigator = navigator)
     }
 }
 
@@ -73,8 +74,8 @@ private fun rememberToolbarState(toolbarHeightRange: IntRange): ToolbarState {
 
 @Composable
 private fun IssDetails(
-    state: IssState
-    // navigator: DestinationsNavigator
+    state: IssState,
+    navigator: DestinationsNavigator
 ) {
     val scrollState = rememberScrollState()
 
@@ -129,7 +130,7 @@ private fun IssDetails(
                 imageHeight = 278.dp,
                 description = iss.spacestation.description,
                 astronauts = iss.crew,
-                //   navigator = navigator,
+                navigator = navigator,
                 modifier = Modifier
                     .fillMaxSize()
                     .graphicsLayer { translationY = toolbarState.height + toolbarState.offset }
@@ -153,7 +154,7 @@ private fun IssDetailsContent(
     imageHeight: Dp,
     description: String,
     astronauts: List<Crew>?,
-    // navigator: DestinationsNavigator,
+    navigator: DestinationsNavigator,
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(0.dp)
 ) {
@@ -181,7 +182,7 @@ private fun IssDetailsContent(
                     astronauts?.let { it1 ->
                         IssCrew(
                             crew = it1,
-                            //  navigator = navigator,
+                            navigator = navigator,
                             modifier = Modifier.constrainAs(crew) { top.linkTo(info.bottom) }
                         )
                     }
@@ -227,7 +228,7 @@ private fun IssDescription(description: String) {
 @Composable
 private fun IssCrew(
     crew: List<Crew>,
-    // navigator: DestinationsNavigator,
+    navigator: DestinationsNavigator,
     modifier: Modifier = Modifier
 ) {
     LazyRow(
@@ -241,7 +242,7 @@ private fun IssCrew(
                     astronaut = crewMember,
                     imageUrl = crewMember.astronaut.profile_image,
                     astronautName = crewMember.astronaut.name,
-                    //  navigator = navigator,
+                    navigator = navigator,
                     modifier = modifier
                 )
             }
@@ -254,11 +255,17 @@ private fun AstronautItem(
     astronaut: Crew,
     imageUrl: String,
     astronautName: String,
-    // navigator: DestinationsNavigator,
+    navigator: DestinationsNavigator,
     modifier: Modifier = Modifier
 ) {
     Card(
-        // onClick = { navigator.navigate(astronaut) }
+        onClick = {
+            navigator.navigate(
+                AstronautDetailActivityDestination(
+                    astronaut.astronaut.id
+                )
+            )
+        }
     ) {
         Column(
             modifier = modifier,
