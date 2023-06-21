@@ -6,9 +6,9 @@ import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Place
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.ramcosta.composedestinations.spec.DirectionDestinationSpec
+import com.space.conquestofspace.presentation.destinations.AgenciesScreenDestination
 import com.space.conquestofspace.presentation.destinations.InternationalSpaceStationScreenDestination
 import com.space.conquestofspace.presentation.destinations.LaunchesListScreenDestination
-import com.space.conquestofspace.presentation.destinations.ThirdScreenDestination
 
 sealed class BottomNavItem(
     val direction: DirectionDestinationSpec,
@@ -28,10 +28,10 @@ sealed class BottomNavItem(
         route = "iss",
         icon = Icons.Default.Place
     )
-    object Third : BottomNavItem(
-        ThirdScreenDestination,
-        name = "Third",
-        route = "third",
+    object Agencies : BottomNavItem(
+        AgenciesScreenDestination,
+        name = "Agencies",
+        route = "agencies",
         icon = Icons.Default.Email
     )
 }

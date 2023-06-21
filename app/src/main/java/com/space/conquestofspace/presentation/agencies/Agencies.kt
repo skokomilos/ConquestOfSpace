@@ -1,4 +1,4 @@
-package com.space.conquestofspace.presentation.thirdscreen
+package com.space.conquestofspace.presentation.agencies
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,11 +10,11 @@ import com.ramcosta.composedestinations.annotation.Destination
 
 @Destination
 @Composable
-fun ThirdScreen() {
+fun AgenciesScreen() {
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        Text(text = "Third Screen")
+        Text(text = "Agencies")
     }
 }

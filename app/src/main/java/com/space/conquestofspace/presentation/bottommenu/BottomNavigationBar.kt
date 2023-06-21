@@ -22,10 +22,10 @@ import androidx.compose.ui.unit.sp
 import com.ramcosta.composedestinations.spec.Direction
 import com.ramcosta.composedestinations.spec.DirectionDestinationSpec
 import com.space.conquestofspace.R
+import com.space.conquestofspace.presentation.destinations.AgenciesScreenDestination
 import com.space.conquestofspace.presentation.destinations.Destination
 import com.space.conquestofspace.presentation.destinations.InternationalSpaceStationScreenDestination
 import com.space.conquestofspace.presentation.destinations.LaunchesListScreenDestination
-import com.space.conquestofspace.presentation.destinations.ThirdScreenDestination
 
 @Composable
 fun BottomNavigationBar(
@@ -36,7 +36,7 @@ fun BottomNavigationBar(
     val screens = listOf(
         BottomNavItem.Launches,
         BottomNavItem.Iss,
-        BottomNavItem.Third
+        BottomNavItem.Agencies
     )
 //    val navBackStackEntry by navController.currentBackStackEntryAsState()
 //    val currentDestination = navBackStackEntry?.destination
@@ -98,7 +98,7 @@ enum class BottomBarDestination(
 ) {
     Launches(LaunchesListScreenDestination, Icons.Default.Home, R.string.greeting_screen),
     Iss(InternationalSpaceStationScreenDestination, Icons.Default.Place, R.string.profile_screen),
-    Third(ThirdScreenDestination, Icons.Default.Email, R.string.settings_screen)
+    Agencies(AgenciesScreenDestination, Icons.Default.Email, R.string.settings_screen)
 }
 
 @Composable
