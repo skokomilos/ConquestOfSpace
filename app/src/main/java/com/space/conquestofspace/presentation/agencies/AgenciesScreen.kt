@@ -15,6 +15,7 @@ fun AgenciesScreen() {
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
+
         Text(text = "Agencies")
     }
 }
