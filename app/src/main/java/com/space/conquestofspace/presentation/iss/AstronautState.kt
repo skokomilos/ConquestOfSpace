@@ -1,6 +1,6 @@
 package com.space.conquestofspace.presentation.iss
 
-import com.space.conquestofspace.data.remote.dto.astronaut.AstronautResponse
+import com.space.conquestofspace.data.remote.responses.astronaut.AstronautResponse
 
 data class AstronautState(
     val astronaut: AstronautResponse? = null,

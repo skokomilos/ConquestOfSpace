@@ -1,6 +1,6 @@
 package com.space.conquestofspace.presentation.iss
 
-import com.space.conquestofspace.data.remote.dto.iss.SpaceStationResponse
+import com.space.conquestofspace.data.remote.responses.iss.SpaceStationResponse
 
 data class IssState(
     val iss: SpaceStationResponse? = null,

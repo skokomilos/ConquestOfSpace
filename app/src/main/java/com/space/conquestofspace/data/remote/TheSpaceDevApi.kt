@@ -1,8 +1,8 @@
 package com.space.conquestofspace.data.remote
 
-import com.space.conquestofspace.data.remote.dto.LaunchesResponse
-import com.space.conquestofspace.data.remote.dto.astronaut.AstronautResponse
-import com.space.conquestofspace.data.remote.dto.iss.SpaceStationResponse
+import com.space.conquestofspace.data.remote.dto.launches.LaunchesResponse
+import com.space.conquestofspace.data.remote.responses.astronaut.AstronautResponse
+import com.space.conquestofspace.data.remote.responses.iss.SpaceStationResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

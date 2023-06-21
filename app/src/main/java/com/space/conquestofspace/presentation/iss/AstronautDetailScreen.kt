@@ -39,10 +39,10 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.space.conquestofspace.R
-import com.space.conquestofspace.data.remote.dto.astronaut.Agency
-import com.space.conquestofspace.data.remote.dto.astronaut.AstronautResponse
-import com.space.conquestofspace.data.remote.dto.astronaut.StatusXXX
-import com.space.conquestofspace.data.remote.dto.astronaut.TypeX
+import com.space.conquestofspace.data.remote.responses.astronaut.Agency
+import com.space.conquestofspace.data.remote.responses.astronaut.AstronautResponse
+import com.space.conquestofspace.data.remote.responses.astronaut.StatusXXX
+import com.space.conquestofspace.data.remote.responses.astronaut.TypeX
 import com.space.conquestofspace.presentation.ui.theme.ConquestOfSpaceAppTheme
 import com.space.conquestofspace.viewmodels.AstronautDetailsViewModel
 
@@ -335,12 +335,12 @@ fun AstronautDetailsPreview() {
             nationality = "American",
             profile_image = "",
             profile_image_thumbnail = "null",
-            status = StatusXXX(
+            status = com.space.conquestofspace.data.remote.responses.astronaut.StatusXXX(
                 id = 1,
                 name = "Active"
             ),
             twitter = "null",
-            type = TypeX(
+            type = com.space.conquestofspace.data.remote.responses.astronaut.TypeX(
                 id = 1,
                 name = "NASA Astronaut"
             ),
@@ -357,7 +357,9 @@ enum class AstronautAttribute(val attributeName: String) {
     AGENCY("agency")
 }
 
-fun createAstronautAttributeMap(astronaut: AstronautResponse): Map<AstronautAttribute, Any> {
+fun createAstronautAttributeMap(
+    astronaut: com.space.conquestofspace.data.remote.responses.astronaut.AstronautResponse
+): Map<AstronautAttribute, Any> {
     return mapOf(
         AstronautAttribute.BIRTH to astronaut.date_of_birth,
         AstronautAttribute.NATIONALITY to astronaut.nationality,
