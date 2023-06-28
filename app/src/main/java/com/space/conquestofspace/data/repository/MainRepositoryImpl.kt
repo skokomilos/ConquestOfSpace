@@ -2,17 +2,18 @@ package com.space.conquestofspace.data.repository
 
 import com.space.conquestofspace.data.local.dao.LaunchDao
 import com.space.conquestofspace.data.remote.TheSpaceDevApi
+import com.space.conquestofspace.data.remote.responses.agencies.Agency
 import com.space.conquestofspace.data.remote.responses.astronaut.AstronautResponse
 import com.space.conquestofspace.data.remote.responses.iss.SpaceStationResponse
 import com.space.conquestofspace.domain.model.Launch
 import com.space.conquestofspace.domain.repository.MainRepository
 import com.space.core.util.Resource
-import java.io.IOException
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
+import java.io.IOException
 
-class LaunchRepositoryImpl(
+class MainRepositoryImpl(
     private val api: TheSpaceDevApi,
     private val dao: LaunchDao
 ) : MainRepository {
@@ -68,6 +69,21 @@ class LaunchRepositoryImpl(
         try {
             val astronaut = api.getAstronautById(id)
             emit(Resource.Success(astronaut))
+        } catch (e: java.lang.Exception) {
+            emit(
+                Resource.Error(
+                    message = "General error"
+                )
+            )
+        }
+    }
+
+    override fun getAgencies(): Flow<Resource<List<Agency>>> = flow {
+        emit(Resource.Loading())
+
+        try {
+            val response = api.getAgencies()
+            emit(Resource.Success(response.results))
         } catch (e: java.lang.Exception) {
             emit(
                 Resource.Error(

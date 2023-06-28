@@ -4,5 +4,5 @@ data class AgenciesResponse(
     val count: Int,
     val next: String,
     val previous: Any,
-    val agencies: List<Agency>
+    val results: List<Agency>
 )
