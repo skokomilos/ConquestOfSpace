@@ -7,9 +7,9 @@ import androidx.lifecycle.viewModelScope
 import com.space.conquestofspace.domain.usecase.GetAgenciesUseCase
 import com.space.core.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import javax.inject.Inject
 
 /**
  *

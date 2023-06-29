@@ -2,6 +2,7 @@ package com.space.conquestofspace.presentation
 
 import android.annotation.SuppressLint
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -57,7 +58,11 @@ fun ConquestOfSpaceApp() {
     }
 }
 
-@OptIn(ExperimentalAnimationApi::class, ExperimentalMaterialNavigationApi::class)
+@OptIn(
+    ExperimentalAnimationApi::class,
+    ExperimentalMaterialNavigationApi::class,
+    ExperimentalFoundationApi::class
+)
 @Composable
 fun AppNavigation(
     modifier: Modifier = Modifier,
@@ -82,7 +87,7 @@ private fun ManualComposableCallsBuilder.launchesScreen() {
     }
 }
 
-@OptIn(ExperimentalMaterialNavigationApi::class)
+@OptIn(ExperimentalMaterialNavigationApi::class, ExperimentalFoundationApi::class)
 @SuppressLint("RestrictedApi")
 @Composable
 fun ConquestOfSpaceScaffold(
