@@ -335,12 +335,12 @@ fun AstronautDetailsPreview() {
             nationality = "American",
             profile_image = "",
             profile_image_thumbnail = "null",
-            status = com.space.conquestofspace.data.remote.responses.astronaut.StatusXXX(
+            status = StatusXXX(
                 id = 1,
                 name = "Active"
             ),
             twitter = "null",
-            type = com.space.conquestofspace.data.remote.responses.astronaut.TypeX(
+            type = TypeX(
                 id = 1,
                 name = "NASA Astronaut"
             ),
@@ -358,7 +358,7 @@ enum class AstronautAttribute(val attributeName: String) {
 }
 
 fun createAstronautAttributeMap(
-    astronaut: com.space.conquestofspace.data.remote.responses.astronaut.AstronautResponse
+    astronaut: AstronautResponse
 ): Map<AstronautAttribute, Any> {
     return mapOf(
         AstronautAttribute.BIRTH to astronaut.date_of_birth,

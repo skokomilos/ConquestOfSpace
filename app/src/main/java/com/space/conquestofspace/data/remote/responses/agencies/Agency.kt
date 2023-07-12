@@ -12,7 +12,6 @@ data class Agency(
     val launchers: String,
     val logo_url: String,
     val name: String,
-    val parent: Any,
     val spacecraft: String,
     val type: String,
     val url: String

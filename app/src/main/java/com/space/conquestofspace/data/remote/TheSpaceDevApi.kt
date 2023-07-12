@@ -21,6 +21,6 @@ interface TheSpaceDevApi {
     @GET("/2.2.0/astronaut/{id}")
     suspend fun getAstronautById(@Path("id") id: Int): AstronautResponse
 
-    @GET("/2.2.0/agencies/")
+    @GET("/2.2.0/agencies/?featured=true")
     suspend fun getAgencies(): AgenciesResponse
 }

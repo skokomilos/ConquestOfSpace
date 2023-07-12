@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -40,7 +39,7 @@ fun AgenciesScreen(
                             .background(Color.Magenta),
                         contentAlignment = Alignment.Center
                     ) {
-                        Text(agency.name)
+                        AgencyListItem(agency = agency)
                     }
                 }
             }
