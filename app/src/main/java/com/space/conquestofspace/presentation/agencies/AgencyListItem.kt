@@ -42,7 +42,18 @@ fun AgencyListItem(
                     painter = painter,
                     contentDescription = null
                 )
-                // AstronautImage(imageUrl = agency.logo_url)
+//                Box(
+//                    Modifier
+//                        .fillMaxSize()
+//                ) {
+//                    com.skydoves.landscapist.glide.GlideImage(
+//                        imageModel = { painter },
+//                        modifier = Modifier
+//                            .fillMaxSize(),
+//                        previewPlaceholder = R.drawable.spacecraft
+//                    )
+//                }
+//                AstronautImage(imageUrl = agency.logo_url)
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
