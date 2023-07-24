@@ -16,16 +16,15 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
-import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.space.conquestofspace.data.remote.responses.agencies.Agency
+import com.space.conquestofspace.presentation.destinations.AgencyDetailScreenDestination
 import com.space.conquestofspace.presentation.ui.theme.ConquestOfSpaceAppTheme
 
 /**
  *
  * @author berka on 6/29/23
  */
-@OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun AgencyListItem(
     agency: Agency,
@@ -37,7 +36,9 @@ fun AgencyListItem(
         elevation = 4.dp,
         modifier = Modifier.fillMaxSize(),
         onClick = {
-            println("some txt ${agency.abbrev}")
+            navigator?.navigate(
+                AgencyDetailScreenDestination
+            )
         }
     ) {
         Column() {
