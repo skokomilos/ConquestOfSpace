@@ -1,4 +1,4 @@
-package com.space.conquestofspace.presentation.iss
+package com.space.conquestofspace.presentation.iss.astronautDetail
 
 import com.space.conquestofspace.data.remote.responses.astronaut.AstronautResponse
 

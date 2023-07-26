@@ -6,7 +6,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.space.conquestofspace.domain.usecase.GetAstronautUseCase
-import com.space.conquestofspace.presentation.iss.AstronautState
+import com.space.conquestofspace.presentation.iss.astronautDetail.AstronautState
 import com.space.core.util.Constants.PARAM_ASTRONAUT_ID
 import com.space.core.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel

@@ -26,7 +26,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".presentation.iss.AstronautDetailActivity"
+            android:name=".presentation.iss.astronautDetail.AstronautDetailActivity"
             android:theme="@style/Theme.ConquestOfSpace.NoActionBar"
             />
     </application>

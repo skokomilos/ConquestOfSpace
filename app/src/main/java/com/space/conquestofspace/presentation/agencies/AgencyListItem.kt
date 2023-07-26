@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.space.conquestofspace.data.remote.responses.agencies.Agency
-import com.space.conquestofspace.presentation.destinations.AgencyDetailScreenDestination
+import com.space.conquestofspace.presentation.destinations.AgencyDetailActivityDestination
 import com.space.conquestofspace.presentation.ui.theme.ConquestOfSpaceAppTheme
 
 /**
@@ -37,7 +37,7 @@ fun AgencyListItem(
         modifier = Modifier.fillMaxSize(),
         onClick = {
             navigator?.navigate(
-                AgencyDetailScreenDestination
+                AgencyDetailActivityDestination
             )
         }
     ) {

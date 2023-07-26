@@ -1,4 +1,4 @@
-package com.space.conquestofspace.presentation.iss
+package com.space.conquestofspace.presentation.iss.astronautDetail
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

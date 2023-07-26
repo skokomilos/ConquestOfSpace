@@ -1,4 +1,4 @@
-package com.space.conquestofspace.presentation.iss
+package com.space.conquestofspace.presentation.iss.astronautDetail
 
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
@@ -43,6 +43,7 @@ import com.space.conquestofspace.data.remote.responses.astronaut.Agency
 import com.space.conquestofspace.data.remote.responses.astronaut.AstronautResponse
 import com.space.conquestofspace.data.remote.responses.astronaut.StatusXXX
 import com.space.conquestofspace.data.remote.responses.astronaut.TypeX
+import com.space.conquestofspace.presentation.iss.FullScreenImage
 import com.space.conquestofspace.presentation.ui.theme.ConquestOfSpaceAppTheme
 import com.space.conquestofspace.viewmodels.AstronautDetailsViewModel
 
