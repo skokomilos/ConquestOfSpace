@@ -29,6 +29,9 @@
             android:name=".presentation.iss.astronautDetail.AstronautDetailActivity"
             android:theme="@style/Theme.ConquestOfSpace.NoActionBar"
             />
+        <activity
+            android:name=".presentation.agencies.detail.AgencyDetailActivity"
+            android:theme="@style/Theme.ConquestOfSpace.NoActionBar"/>
     </application>
 
 </manifest>
