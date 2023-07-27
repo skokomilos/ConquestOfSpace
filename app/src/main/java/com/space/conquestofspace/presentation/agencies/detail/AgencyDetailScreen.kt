@@ -4,6 +4,7 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import com.ramcosta.composedestinations.annotation.Destination
+import com.space.conquestofspace.presentation.agencies.AgenciesViewModel
 
 /**
  *
@@ -11,7 +12,9 @@ import com.ramcosta.composedestinations.annotation.Destination
  */
 @Composable
 @Destination
-fun AgencyDetailScreen() {
+fun AgencyDetailScreen(
+    viewModel: AgenciesViewModel,
+) {
     Surface() {
         Text("Agency Detail")
     }

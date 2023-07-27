@@ -37,7 +37,7 @@ fun AgencyListItem(
         modifier = Modifier.fillMaxSize(),
         onClick = {
             navigator?.navigate(
-                AgencyDetailActivityDestination
+                AgencyDetailActivityDestination(agencyId = agency.id)
             )
         }
     ) {
