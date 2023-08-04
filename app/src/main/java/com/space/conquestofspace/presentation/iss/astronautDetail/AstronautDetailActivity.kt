@@ -27,12 +27,11 @@ class AstronautDetailActivity : ComponentActivity() {
 
         val args = AstronautDetailActivityDestination.argsFrom(intent)
         savedInstanceState?.putInt(PARAM_ASTRONAUT_ID, args.astronautID)
-        println("OtherActivity args = $args")
 
         setContentView(
             ComposeView(this).apply {
                 setContent {
-                    AstronautDetailScreen(astronautId = args.astronautID)
+                    AstronautDetailScreen()
                 }
             }
         )

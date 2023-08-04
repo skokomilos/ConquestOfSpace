@@ -2,6 +2,7 @@ package com.space.conquestofspace.data.remote
 
 import com.space.conquestofspace.data.remote.dto.launches.LaunchesResponse
 import com.space.conquestofspace.data.remote.responses.agencies.AgenciesResponse
+import com.space.conquestofspace.data.remote.responses.agencies.Agency
 import com.space.conquestofspace.data.remote.responses.astronaut.AstronautResponse
 import com.space.conquestofspace.data.remote.responses.iss.SpaceStationResponse
 import retrofit2.http.GET
@@ -23,4 +24,7 @@ interface TheSpaceDevApi {
 
     @GET("/2.2.0/agencies/?featured=true")
     suspend fun getAgencies(): AgenciesResponse
+
+    @GET("/2.2.0/agencies/{id}")
+    suspend fun getAgencyById(@Path("id") id: Int): Agency
 }

@@ -1,10 +1,10 @@
-package com.space.conquestofspace.presentation.agencies
+package com.space.conquestofspace.presentation.agencies.list
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.space.conquestofspace.domain.usecase.GetAgenciesUseCase
+import com.space.conquestofspace.domain.usecase.agency.GetAgenciesUseCase
 import com.space.core.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject

@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalMaterialApi::class)
 
-package com.space.conquestofspace.presentation.agencies
+package com.space.conquestofspace.presentation.agencies.list
 
 import androidx.compose.animation.AnimatedVisibilityScope
 import androidx.compose.foundation.layout.Box

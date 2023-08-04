@@ -16,4 +16,6 @@ interface MainRepository {
     fun getAstronautById(id: Int): Flow<Resource<AstronautResponse>>
 
     fun getAgencies(): Flow<Resource<List<Agency>>>
+
+    fun getAgencyById(id: Int): Flow<Resource<Agency>>
 }

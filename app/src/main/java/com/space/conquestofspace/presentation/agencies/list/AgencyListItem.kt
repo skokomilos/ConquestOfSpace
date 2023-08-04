@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalMaterialApi::class)
 
-package com.space.conquestofspace.presentation.agencies
+package com.space.conquestofspace.presentation.agencies.list
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column

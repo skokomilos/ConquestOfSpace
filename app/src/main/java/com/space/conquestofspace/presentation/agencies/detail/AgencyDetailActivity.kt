@@ -27,12 +27,11 @@ class AgencyDetailActivity : ComponentActivity() {
 
         val args = AgencyDetailActivityDestination.argsFrom(intent)
         savedInstanceState?.putInt(PARAM_AGENCY_ID, args.agencyId)
-        println(":show me key id : $args")
 
         setContentView(
             ComposeView(this).apply {
                 setContent {
-                    // AgencyDetailScreen()
+                    AgencyDetailScreen()
                 }
             }
         )

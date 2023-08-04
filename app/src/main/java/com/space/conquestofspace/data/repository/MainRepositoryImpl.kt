@@ -92,4 +92,19 @@ class MainRepositoryImpl(
             )
         }
     }
+
+    override fun getAgencyById(id: Int): Flow<Resource<Agency>> = flow {
+        emit(Resource.Loading())
+
+        try {
+            val agency = api.getAgencyById(id)
+            emit(Resource.Success(agency))
+        } catch (e: java.lang.Exception) {
+            emit(
+                Resource.Error(
+                    message = "General error"
+                )
+            )
+        }
+    }
 }

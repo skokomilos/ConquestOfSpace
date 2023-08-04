@@ -1,4 +1,4 @@
-package com.space.conquestofspace.domain.usecase
+package com.space.conquestofspace.domain.usecase.agency
 
 import com.space.conquestofspace.data.remote.responses.agencies.Agency
 import com.space.conquestofspace.domain.repository.MainRepository

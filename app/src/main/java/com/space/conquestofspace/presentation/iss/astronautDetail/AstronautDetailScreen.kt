@@ -49,8 +49,7 @@ import com.space.conquestofspace.viewmodels.AstronautDetailsViewModel
 
 @Composable
 fun AstronautDetailScreen(
-    viewModel: AstronautDetailsViewModel = hiltViewModel(),
-    astronautId: Int
+    viewModel: AstronautDetailsViewModel = hiltViewModel()
 ) {
     val state = viewModel.state.value
 
