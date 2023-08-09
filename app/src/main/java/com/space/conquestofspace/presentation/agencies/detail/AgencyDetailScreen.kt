@@ -2,12 +2,15 @@ package com.space.conquestofspace.presentation.agencies.detail
 
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
@@ -23,10 +26,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Constraints
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.lerp
 import androidx.compose.ui.util.lerp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.space.conquestofspace.data.remote.responses.agencies.Agency
 import com.space.conquestofspace.presentation.iss.CircleImage
 import com.space.conquestofspace.presentation.ui.theme.ConquestOfSpaceAppTheme
 import kotlin.math.max
@@ -35,6 +40,7 @@ import kotlin.math.min
  *
  * @author berka on 7/24/23
  */
+private val TitleHeight = 128.dp
 private val MinTitleOffset = 56.dp
 private val MinImageOffset = 12.dp
 private val GradientScroll = 180.dp
@@ -62,7 +68,7 @@ fun AgencyDetailContent(state: AgencyDetailState) {
         val scroll = rememberScrollState(0)
         Header()
         Body(scroll)
-        Title(scroll.value, "Neki naslov")
+        Title(state.agency) { scroll.value }
         Image(state.agency?.image_url) { scroll.value }
     }
 }
@@ -164,5 +170,26 @@ fun CollapsingImageLayout(
 }
 
 @Composable
-fun Title(s1: Int, s: String) {
+fun Title(agency: Agency?, scrollProvider: () -> Int) {
+    val maxOffset = with(LocalDensity.current) { MaxTitleOffset.toPx() }
+    val minOffset = with(LocalDensity.current) { MinTitleOffset.toPx() }
+
+    Column(
+        verticalArrangement = Arrangement.Bottom,
+        modifier = Modifier
+            .heightIn(min = TitleHeight)
+            .statusBarsPadding()
+            .offset {
+                val scroll = scrollProvider()
+                val offset = (maxOffset - scroll).coerceAtLeast(minOffset)
+                IntOffset(x = 0, y = offset.toInt())
+            }
+            .background(color = MaterialTheme.colors.background)
+    ) {
+        Spacer(Modifier.height(16.dp))
+        Text(
+            text = "Headline H1",
+            modifier = HzPadding
+        )
+    }
 }
