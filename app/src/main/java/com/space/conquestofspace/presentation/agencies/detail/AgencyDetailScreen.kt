@@ -20,17 +20,24 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.lerp
 import androidx.compose.ui.util.lerp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.space.conquestofspace.R
 import com.space.conquestofspace.data.remote.responses.agencies.Agency
 import com.space.conquestofspace.presentation.iss.CircleImage
 import com.space.conquestofspace.presentation.ui.theme.ConquestOfSpaceAppTheme
@@ -110,6 +117,16 @@ private fun Body(scroll: ScrollState) {
                         text = "Details",
                         style = MaterialTheme.typography.overline,
                         color = MaterialTheme.colors.primary
+                    )
+                    Spacer(Modifier.height(16.dp))
+                    var seeMore by remember { mutableStateOf(true) }
+                    Text(
+                        text = stringResource(id = R.string.dummy_large_text),
+                        style = MaterialTheme.typography.body1,
+                        color = MaterialTheme.colors.secondary,
+                        maxLines = if (false) 5 else Int.MAX_VALUE,
+                        overflow = TextOverflow.Ellipsis,
+                        modifier = HzPadding
                     )
                 }
             }
