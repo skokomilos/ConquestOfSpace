@@ -271,7 +271,7 @@ private fun AstronautItem(
             modifier = modifier,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            PersonImage(
+            CircleImage(
                 model = imageUrl,
                 contentDescription = null
             )
