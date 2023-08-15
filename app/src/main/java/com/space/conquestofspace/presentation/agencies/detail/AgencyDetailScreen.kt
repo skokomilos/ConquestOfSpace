@@ -1,5 +1,6 @@
 package com.space.conquestofspace.presentation.agencies.detail
 
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -20,11 +21,13 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.Layout
@@ -43,6 +46,8 @@ import com.space.conquestofspace.presentation.iss.CircleImage
 import com.space.conquestofspace.presentation.ui.theme.ConquestOfSpaceAppTheme
 import kotlin.math.max
 import kotlin.math.min
+import kotlinx.coroutines.delay
+
 /**
  *
  * @author berka on 7/24/23
@@ -141,9 +146,22 @@ fun Image(imageUrl: String?, scrollProvider: () -> Int) {
         (scrollProvider() / collapseRange).coerceIn(0f, 1f)
     }
 
+    var rotationState by remember { mutableStateOf(0f) }
+    val rotationAngle by animateFloatAsState(targetValue = rotationState)
+
+    LaunchedEffect(Unit) {
+        while (true) {
+            rotationState += 2f // Adjust the rotation speed here
+            if (rotationState >= 360f) {
+                rotationState = 0f
+            }
+            delay(16) // Delay in milliseconds
+        }
+    }
+
     CollapsingImageLayout(
         collapseFractionProvider = collapseFractionProvider,
-        modifier = HzPadding.then(Modifier.statusBarsPadding())
+        modifier = HzPadding.then(Modifier.statusBarsPadding()).rotate(rotationAngle)
     ) {
         CircleImage(
             model = imageUrl,
