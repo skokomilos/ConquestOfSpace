@@ -8,12 +8,12 @@ import com.space.conquestofspace.domain.model.Status
 
 @Entity
 data class LaunchEntity(
-    val name: String,
+    val name: String?,
     val status: Status,
     val window_start: String,
     val rocket: Rocket,
     //  val pad: Pad,
-    val image: String,
+    val image: String?,
     val webcast_live: Boolean,
     @PrimaryKey val id: Int? = null
 ) {

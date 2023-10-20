@@ -1,6 +1,5 @@
 package com.space.conquestofspace.presentation.agencies.detail
 
-import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -21,7 +20,6 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -46,7 +44,6 @@ import com.space.conquestofspace.presentation.iss.CircleImage
 import com.space.conquestofspace.presentation.ui.theme.ConquestOfSpaceAppTheme
 import kotlin.math.max
 import kotlin.math.min
-import kotlinx.coroutines.delay
 
 /**
  *
@@ -133,6 +130,7 @@ private fun Body(scroll: ScrollState) {
                         overflow = TextOverflow.Ellipsis,
                         modifier = HzPadding
                     )
+                    Spacer(Modifier.height(400.dp))
                 }
             }
         }
@@ -146,22 +144,24 @@ fun Image(imageUrl: String?, scrollProvider: () -> Int) {
         (scrollProvider() / collapseRange).coerceIn(0f, 1f)
     }
 
-    var rotationState by remember { mutableStateOf(0f) }
-    val rotationAngle by animateFloatAsState(targetValue = rotationState)
+    var rotationAngle by remember { mutableStateOf(0f) }
 
-    LaunchedEffect(Unit) {
-        while (true) {
-            rotationState += 2f // Adjust the rotation speed here
-            if (rotationState >= 360f) {
-                rotationState = 0f
-            }
-            delay(16) // Delay in milliseconds
-        }
+    val maxRotation = 90f // Maximum rotation angle
+    val maxScroll = 1000 // Scroll position at which rotation should stop
+
+    val currentScroll = scrollProvider()
+
+    if (currentScroll <= maxScroll) {
+        rotationAngle = currentScroll.toFloat() * 0.1f
+    } else {
+        rotationAngle = maxRotation
     }
 
     CollapsingImageLayout(
+        scrollProvider,
         collapseFractionProvider = collapseFractionProvider,
-        modifier = HzPadding.then(Modifier.statusBarsPadding()).rotate(rotationAngle)
+        modifier = HzPadding.then(Modifier.statusBarsPadding())
+
     ) {
         CircleImage(
             model = imageUrl,
@@ -173,12 +173,21 @@ fun Image(imageUrl: String?, scrollProvider: () -> Int) {
 
 @Composable
 fun CollapsingImageLayout(
+    scrollProvider: () -> Int,
     collapseFractionProvider: () -> Float,
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit
 ) {
+    val collapseFraction = collapseFractionProvider()
+    val maxRotation = collapseFraction * 360f // Adjust the maximum rotation angle here
+
+    val rotationAngle = if (collapseFraction < 1f) {
+        collapseFraction * maxRotation
+    } else {
+        maxRotation
+    }
     Layout(
-        modifier = modifier,
+        modifier = modifier.rotate(rotationAngle),
         content = content
     ) { measurables, constraints ->
         check(measurables.size == 1)
@@ -189,7 +198,11 @@ fun CollapsingImageLayout(
         val imageWidth = lerp(imageMaxSize, imageMinSize, collapseFraction)
         val imagePlaceable = measurables[0].measure(Constraints.fixed(imageWidth, imageWidth))
 
-        val imageY = lerp(MinTitleOffset, MinImageOffset, collapseFraction).roundToPx()
+        val imageY = lerp(
+            start = MinTitleOffset,
+            stop = MinImageOffset,
+            fraction = collapseFraction
+        ).roundToPx()
         val imageX = lerp(
             (constraints.maxWidth - imageWidth) / 2,
             constraints.maxWidth - imageWidth,

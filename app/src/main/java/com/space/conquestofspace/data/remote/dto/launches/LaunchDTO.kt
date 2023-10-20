@@ -24,7 +24,7 @@ data class LaunchDTO(
     // 3. need -location - name
     val pad: PadDTO,
     // 8. need
-    val image: String,
+    val image: String? = "",
     val webcast_live: Boolean
 ) {
     // mapper fun
