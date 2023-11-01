@@ -48,7 +48,7 @@ fun SpaceImage(
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
-fun PersonImage(
+fun CircleImage(
     model: Any?,
     contentDescription: String?,
     modifier: Modifier = Modifier

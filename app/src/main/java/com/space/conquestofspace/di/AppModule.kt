@@ -2,9 +2,11 @@ package com.space.conquestofspace.di
 
 import com.space.conquestofspace.data.local.dao.LaunchDao
 import com.space.conquestofspace.data.remote.TheSpaceDevApi
-import com.space.conquestofspace.data.repository.LaunchRepositoryImpl
+import com.space.conquestofspace.data.repository.MainRepositoryImpl
 import com.space.conquestofspace.domain.repository.MainRepository
 import com.space.conquestofspace.domain.usecase.GetAstronautUseCase
+import com.space.conquestofspace.domain.usecase.agency.GetAgenciesUseCase
+import com.space.conquestofspace.domain.usecase.agency.GetAgencyUseCase
 import com.space.conquestofspace.domain.usecase.getiss.GetIssUseCase
 import com.space.conquestofspace.domain.usecase.getlaunches.GetLaunchesUseCase
 import dagger.Module
@@ -23,7 +25,7 @@ object AppModule {
         api: TheSpaceDevApi,
         launchDao: LaunchDao
     ): MainRepository {
-        return LaunchRepositoryImpl(api, launchDao)
+        return MainRepositoryImpl(api, launchDao)
     }
 
     @Provides
@@ -42,5 +44,17 @@ object AppModule {
     @Singleton
     fun provideAstronautUseCase(repository: MainRepository): GetAstronautUseCase {
         return GetAstronautUseCase(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideAgenciesUseCase(repository: MainRepository): GetAgenciesUseCase {
+        return GetAgenciesUseCase(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideAgencyUseCase(repository: MainRepository): GetAgencyUseCase {
+        return GetAgencyUseCase(repository)
     }
 }

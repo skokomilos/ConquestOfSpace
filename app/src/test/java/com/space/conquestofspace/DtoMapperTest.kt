@@ -1,11 +1,11 @@
 package com.space.conquestofspace
 import com.space.conquestofspace.data.local.entity.LaunchEntity
-import com.space.conquestofspace.data.remote.dto.LaunchDTO
-import com.space.conquestofspace.data.remote.dto.LocationDTO
-import com.space.conquestofspace.data.remote.dto.PadDTO
-import com.space.conquestofspace.data.remote.dto.RocketConfigurationDTO
-import com.space.conquestofspace.data.remote.dto.RocketDTO
-import com.space.conquestofspace.data.remote.dto.StatusDTO
+import com.space.conquestofspace.data.remote.dto.launches.LaunchDTO
+import com.space.conquestofspace.data.remote.dto.launches.LocationDTO
+import com.space.conquestofspace.data.remote.dto.launches.PadDTO
+import com.space.conquestofspace.data.remote.dto.launches.RocketConfigurationDTO
+import com.space.conquestofspace.data.remote.dto.launches.RocketDTO
+import com.space.conquestofspace.data.remote.dto.launches.StatusDTO
 import com.space.conquestofspace.domain.model.Rocket
 import com.space.conquestofspace.domain.model.Status
 import org.junit.Assert.assertEquals

@@ -38,7 +38,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.space.conquestofspace.R
-import com.space.conquestofspace.data.remote.dto.iss.Crew
+import com.space.conquestofspace.data.remote.responses.iss.Crew
 import com.space.conquestofspace.presentation.destinations.AstronautDetailActivityDestination
 import com.space.conquestofspace.presentation.toolbar.CollapsingToolbar
 import com.space.conquestofspace.presentation.toolbar.FixedScrollFlagState
@@ -271,7 +271,7 @@ private fun AstronautItem(
             modifier = modifier,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            PersonImage(
+            CircleImage(
                 model = imageUrl,
                 contentDescription = null
             )
